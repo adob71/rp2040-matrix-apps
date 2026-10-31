@@ -10,7 +10,7 @@ This project runs on the [Waveshare RP2040-Matrix](https://www.waveshare.com/rp2
 
 | Front | Back |
 |:---:|:---:|
-| <img src="docs/rp2040-matrix-front.png" width="200" alt="RP2040-Matrix front"> | <img src="docs/rp2040-matrix-back.png" width="200" alt="RP2040-Matrix back"> |
+| <img src="docs/rp2040-matrix-front.png" width="300" alt="RP2040-Matrix front"> | <img src="docs/rp2040-matrix-back.png" width="300" alt="RP2040-Matrix back"> |
 
 | # | Description |
 |---|---|
