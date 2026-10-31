@@ -1,6 +1,8 @@
 # RP2040-Matrix Apps
 
-A little computer with a 5×5 LED matrix that runs little apps. Plug it into a USB port and it starts by itself.
+**Little apps for a little 5×5 LED computer**
+
+Plug it into a USB port and it starts by itself.
 
 This project runs on the [Waveshare RP2040-Matrix](https://www.waveshare.com/rp2040-matrix.htm), a development board by Waveshare built around the [Raspberry Pi RP2040](https://pip-assets.raspberrypi.com/categories/814-rp2040/documents/RP-008371-DS-1-rp2040-datasheet.pdf) microcontroller.
 
