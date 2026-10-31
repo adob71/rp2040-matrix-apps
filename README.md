@@ -49,14 +49,13 @@ Press BOOT to step through the apps in this order.
 
 ## Developers
 
-Apps are small MicroPython files in `apps/`. The quickest first app is a "hello world": copy the `name` app and change its text.
+1. Install mpremote: `brew install mpremote` (or `pip install mpremote`).
+2. Clone the repo: `git clone https://github.com/adob71/rp2040-matrix-apps.git && cd rp2040-matrix-apps`
+3. Add your app to `apps/`. For a first try, copy `apps/name.py` to `apps/hello.py` and change `TEXT`.
+4. Add `"hello"` to the `APPS` list in `launcher.py`, keeping it in alphabetical order.
+5. Connect the board by USB and run `./deploy.sh --apps`, then press BOOT until your app shows up. On a brand-new board, run `./deploy.sh --firmware` first.
 
-1. Run `cp apps/name.py apps/hello.py`, then in `apps/hello.py` set `TEXT = "HELLO WORLD"`.
-2. Add `"hello"` to the `APPS` list in `launcher.py`, keeping it alphabetical (after `"heart"`).
-3. Connect the board by USB and run `./deploy.sh --apps`. This needs `mpremote` (`pip install mpremote`). On a brand-new board, run `./deploy.sh --firmware` once first.
-4. Press BOOT until "HELLO WORLD" appears.
-
-More for developers is coming soon: the repo structure, the shared library, deploying and writing your own apps.
+More for developers is coming soon: the repo structure, the shared library, developing and deploying your own apps.
 
 ## License
 
