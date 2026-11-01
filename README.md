@@ -73,7 +73,9 @@ git clone https://github.com/adob71/rp2040-matrix-apps.git && cd rp2040-matrix-a
 
 For example: `/rp2040-add-app a traffic light that cycles red, green and yellow`
 
-In Claude Code type a skill with a slash, as in `/rp2040-setup`. In Codex use `$rp2040-setup`. In GitHub Copilot describe the task in words and it loads the skill by itself. No AI agent? The skills in `.agents/skills/` are plain step-by-step instructions you can follow by hand.
+In Claude Code type a skill with a slash, as in `/rp2040-setup`. In Codex use `$rp2040-setup`. In GitHub Copilot describe the task in words and it loads the skill by itself. 
+
+No AI agent? The skills in `.agents/skills/` are plain step-by-step instructions you can follow by hand.
 
 ## License
 
