@@ -61,7 +61,7 @@ This repo is built to be worked on with an AI coding agent. Clone it, open your 
 ### Get started
 
 ```bash
-git clone https://github.com/adob71/rp2040-matrix-apps.git && cd rp2040-matrix-apps
+git clone git@github.com:adob71/rp2040-matrix-apps.git && cd rp2040-matrix-apps
 ```
 
 | Step | Skill | What it does |
