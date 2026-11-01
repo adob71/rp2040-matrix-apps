@@ -49,13 +49,12 @@ Press BOOT to step through the apps in this order.
 
 ## Developers
 
-This repo is built to be worked on with an AI coding agent. Clone it, open your agent in the repo folder, and use the skills.
+This repo is built to be used with an AI coding agent. Clone it, open your agent in the repo folder, and use the skills.
 
 ### Requirements
 
 - macOS (the commands assume it)
-- [Homebrew](https://brew.sh/) and Python 3
-- An AI coding agent that supports [Agent Skills](https://agentskills.io), such as Claude Code, Codex or GitHub Copilot
+- An AI coding agent that supports [Agent Skills](https://agentskills.io), such as Claude Code, OpenAI Codex or GitHub Copilot CLI
 - RP2040-Matrix board and a USB Type-C data cable
 
 ### Get started
@@ -66,16 +65,20 @@ git clone git@github.com:adob71/rp2040-matrix-apps.git && cd rp2040-matrix-apps
 
 | Step | Skill | What it does |
 |---|---|---|
-| 1 | `rp2040-setup` | One time: installs mpremote and checks the USB connection to the board. |
+| 1 | `rp2040-setup` | One-time: installs mpremote and checks the USB connection to the board. |
 | 2 | `rp2040-deploy` | Installs MicroPython on a new board and deploys the apps. |
-| 3 | `rp2040-add-app` | Adds a new app from your description and makes its preview GIF. |
+| 3 | `rp2040-add-app` | Adds a new app from your description and creates its preview GIF. |
 | 4 | `rp2040-deploy` | Deploys the new app. Repeat steps 3 and 4 for every app you add. |
 
 For example: `/rp2040-add-app a traffic light that cycles red, green and yellow`
 
-In Claude Code type a skill with a slash, as in `/rp2040-setup`. In Codex use `$rp2040-setup`. In GitHub Copilot describe the task in words and it loads the skill by itself. 
+Invoke skills depending on your AI coding agent:
 
-No AI agent? The skills in `.agents/skills/` are plain step-by-step instructions you can follow by hand.
+- **Claude Code:** `/rp2040-setup`
+- **OpenAI Codex:** `$rp2040-setup`
+- **GitHub Copilot CLI:** `/rp2040-setup`
+
+No AI coding agent? The skills in `.agents/skills/` are plain step-by-step instructions you can follow by hand.
 
 ## License
 
