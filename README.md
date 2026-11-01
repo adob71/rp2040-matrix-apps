@@ -74,9 +74,9 @@ For example: `/rp2040-add-app a traffic light that cycles red, green and yellow`
 
 Invoke skills depending on your AI coding agent:
 
-- **Claude Code:** `/rp2040-setup`
-- **OpenAI Codex:** `$rp2040-setup`
-- **GitHub Copilot CLI:** `/rp2040-setup`
+- Claude Code: `/rp2040-setup`
+- OpenAI Codex: `$rp2040-setup`
+- GitHub Copilot CLI: `/rp2040-setup`
 
 No AI coding agent? The skills in `.agents/skills/` are plain step-by-step instructions you can follow by hand.
 
