@@ -49,33 +49,31 @@ Press BOOT to step through the apps in this order.
 
 ## Developers
 
-The repository includes skills to set up the development environment, deploy apps and add new apps.
-
-### Skills
-
-| Skill | Description |
-|---|---|
-| `rp2040-setup` | Set up the macOS development environment and verify the USB connection. |
-| `rp2040-deploy` | Install MicroPython firmware when needed and deploy apps to the board. |
-| `rp2040-add-app` | Add a new app and generate a preview GIF. |
-
-### Workflow
-
-| Step | Command | Description |
-|---|---|---|
-| 1 | `/rp2040-setup` | One-time environment setup. |
-| 2 | `/rp2040-deploy` | Deploy existing apps. |
-| 3 | `/rp2040-add-app <description>` | Add a new app. |
-| 4 | `/rp2040-deploy` | Deploy the updated apps. |
-| 5 | Repeat steps 3–4 | Add and deploy more apps. |
+This repo is built to be worked on with an AI coding agent. Clone it, open your agent in the repo folder, and use the skills.
 
 ### Requirements
 
-- macOS
-- [Homebrew](https://brew.sh/)
-- Python 3
-- RP2040-Matrix board
-- USB Type-C data cable or adapter
+- macOS (the commands assume it)
+- [Homebrew](https://brew.sh/) and Python 3
+- An AI coding agent that supports [Agent Skills](https://agentskills.io), such as Claude Code, Codex or GitHub Copilot
+- RP2040-Matrix board and a USB Type-C data cable
+
+### Get started
+
+```bash
+git clone https://github.com/adob71/rp2040-matrix-apps.git && cd rp2040-matrix-apps
+```
+
+| Step | Skill | What it does |
+|---|---|---|
+| 1 | `rp2040-setup` | One time: installs mpremote and checks the USB connection to the board. |
+| 2 | `rp2040-deploy` | Installs MicroPython on a new board and deploys the apps. |
+| 3 | `rp2040-add-app` | Adds a new app from your description and makes its preview GIF. |
+| 4 | `rp2040-deploy` | Deploys the new app. Repeat steps 3 and 4 for every app you add. |
+
+For example: `/rp2040-add-app a traffic light that cycles red, green and yellow`
+
+In Claude Code type a skill with a slash, as in `/rp2040-setup`. In Codex use `$rp2040-setup`. In GitHub Copilot describe the task in words and it loads the skill by itself. No AI agent? The skills in `.agents/skills/` are plain step-by-step instructions you can follow by hand.
 
 ## License
 
