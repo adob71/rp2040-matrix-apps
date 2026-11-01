@@ -61,11 +61,13 @@ The repository includes skills to set up the development environment, deploy app
 
 ### Workflow
 
-1. `/rp2040-setup` — one-time environment setup.
-2. `/rp2040-deploy` — deploy existing apps.
-3. `/rp2040-add-app <description>` — add a new app.
-4. `/rp2040-deploy` — deploy the updated apps.
-5. Repeat steps 3–4 to add more apps.
+| Step | Command | Description |
+|---|---|---|
+| 1 | `/rp2040-setup` | One-time environment setup. |
+| 2 | `/rp2040-deploy` | Deploy existing apps. |
+| 3 | `/rp2040-add-app <description>` | Add a new app. |
+| 4 | `/rp2040-deploy` | Deploy the updated apps. |
+| 5 | Repeat steps 3–4 | Add and deploy more apps. |
 
 ### Requirements
 
