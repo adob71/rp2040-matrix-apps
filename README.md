@@ -49,13 +49,31 @@ Press BOOT to step through the apps in this order.
 
 ## Developers
 
-1. Install mpremote: `brew install mpremote` (or `pip install mpremote`).
-2. Clone the repo: `git clone https://github.com/adob71/rp2040-matrix-apps.git && cd rp2040-matrix-apps`
-3. Add your app to `apps/`. For a first try, copy `apps/name.py` to `apps/hello.py` and change `TEXT`.
-4. Add `"hello"` to the `APPS` list in `launcher.py`, keeping it in alphabetical order.
-5. Connect the board by USB and run `./deploy.sh --apps`, then press BOOT until your app shows up. On a brand-new board, run `./deploy.sh --firmware` first.
+The repository includes skills to set up the development environment, deploy apps and add new apps.
 
-More for developers is coming soon: the repo structure, the shared library, developing and deploying your own apps.
+### Skills
+
+| Skill | Description |
+|---|---|
+| `rp2040-setup` | Set up the macOS development environment and verify the USB connection. |
+| `rp2040-deploy` | Install MicroPython firmware when needed and deploy apps to the board. |
+| `rp2040-add-app` | Add a new app and generate a preview GIF. |
+
+### Workflow
+
+1. `/rp2040-setup` — one-time environment setup.
+2. `/rp2040-deploy` — deploy existing apps.
+3. `/rp2040-add-app <description>` — add a new app.
+4. `/rp2040-deploy` — deploy the updated apps.
+5. Repeat steps 3–4 to add more apps.
+
+### Requirements
+
+- macOS
+- [Homebrew](https://brew.sh/)
+- Python 3
+- RP2040-Matrix board
+- USB Type-C data cable or adapter
 
 ## License
 
