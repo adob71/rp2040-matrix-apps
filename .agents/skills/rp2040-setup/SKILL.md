@@ -4,8 +4,9 @@ description: >-
   One-time setup of the macOS development environment for the RP2040-Matrix
   apps repository. Installs mpremote using Homebrew, checks the repository,
   finds the board over USB and verifies that MicroPython responds.
-  Use when a user is new to the repository or asks to set up the environment.
-  Run once per computer.
+  Use when a user is new to the repository, asks to set up or get started,
+  install mpremote, connect the board, or reports "board not found" or
+  mpremote errors. Run once per computer.
 compatibility: macOS, Homebrew, Python 3 and an RP2040-Matrix board connected over USB.
 ---
 

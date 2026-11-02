@@ -60,7 +60,7 @@ This repo is built to be used with an AI coding agent. Clone it, open your agent
 ### Get started
 
 ```bash
-git clone git@github.com:adob71/rp2040-matrix-apps.git && cd rp2040-matrix-apps
+git clone https://github.com/adob71/rp2040-matrix-apps.git && cd rp2040-matrix-apps
 ```
 
 | Step | Skill | What it does |
@@ -76,7 +76,7 @@ Invoke skills depending on your AI coding agent:
 
 - Claude Code: `/rp2040-setup`
 - OpenAI Codex: `$rp2040-setup`
-- GitHub Copilot CLI: `/rp2040-setup`
+- GitHub Copilot CLI: `Use the /rp2040-setup skill to set up this repo`
 
 No AI coding agent? The skills in `.agents/skills/` are plain step-by-step instructions you can follow by hand.
 
