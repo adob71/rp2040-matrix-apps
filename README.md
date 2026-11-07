@@ -25,7 +25,7 @@ This project runs on the [Waveshare RP2040-Matrix](https://www.waveshare.com/rp2
 
 | Control | Description |
 |---|---|
-| Touch pads (GP8–GP14) | Touch pads inside the yellow outline to control apps that react to touch. |
+| Touch pads (GP8–GP14) | Touch the pads inside the yellow outline to control apps that react to touch. |
 | BOOT button | Press to switch to the next app; after the last one it starts over. |
 | RESET button | Press to restart the board; it comes back on the same app. |
 
@@ -49,34 +49,19 @@ Press BOOT to step through the apps in this order.
 
 ## Developers
 
-This repo is built to be used with an AI coding agent. Clone it, open your agent in the repo folder, and use the skills.
-
-### Requirements
-
-- macOS (the commands assume it)
-- An AI coding agent that supports [Agent Skills](https://agentskills.io), such as Claude Code, OpenAI Codex or GitHub Copilot CLI
-- RP2040-Matrix board and a USB Type-C data cable
-
-### Get started
+This repo is built to be used with an AI coding agent that supports [Agent Skills](https://agentskills.io), such as GitHub Copilot. You also need macOS, the board and a USB Type-C data cable.
 
 ```bash
 git clone https://github.com/adob71/rp2040-matrix-apps.git && cd rp2040-matrix-apps
 ```
 
-| Step | Skill | What it does |
-|---|---|---|
-| 1 | `rp2040-setup` | One-time: installs mpremote and checks the USB connection to the board. |
-| 2 | `rp2040-deploy` | Installs MicroPython on a new board and deploys the apps. |
-| 3 | `rp2040-add-app` | Adds a new app from your description and creates its preview GIF. |
-| 4 | `rp2040-deploy` | Deploys the new app. Repeat steps 3 and 4 for every app you add. |
+Open your agent in the folder and ask for what you want. It picks the matching skill:
 
-For example: `/rp2040-add-app a traffic light that cycles red, green and yellow`
-
-Invoke skills depending on your AI coding agent:
-
-- Claude Code: `/rp2040-setup`
-- OpenAI Codex: `$rp2040-setup`
-- GitHub Copilot CLI: `Use the /rp2040-setup skill to set up this repo`
+| Say | Skill |
+|---|---|
+| "Set up my computer for this repo" | `rp2040-setup` |
+| "Deploy to my board" | `rp2040-deploy` |
+| "Add an app that shows a traffic light" | `rp2040-add-app` |
 
 No AI coding agent? The skills in `.agents/skills/` are plain step-by-step instructions you can follow by hand.
 
