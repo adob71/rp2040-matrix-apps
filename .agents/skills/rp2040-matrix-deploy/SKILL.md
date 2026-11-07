@@ -20,18 +20,22 @@ Check that `deploy.sh`, `launcher.py`, `apps/` and `lib/` exist, and that `comma
 
 ## 2. Find out what state the board is in
 
-Run:
+Run these checks:
 
 ```bash
 ls /Volumes/RPI-RP2
+mpremote connect list
 mpremote exec "import sys; print(sys.version)"
 ```
 
+The `ls` fails whenever the board is not in firmware mode. That is normal and not an error. Then read the results:
+
 | Result | Meaning | Next |
 |---|---|---|
-| A MicroPython version is printed | The board is ready | Go to step 4 |
 | `/Volumes/RPI-RP2` exists | The board is in firmware mode | Go to step 3 |
-| Neither works | The board is not connected or has no MicroPython yet | Ask the user to check the cable and port, then go to step 3 |
+| A MicroPython version is printed | The board is ready | Go to step 4 |
+| `connect list` shows a `usbmodem` device, but `mpremote exec` says "no device found" | Your command sandbox is blocking the serial port, so the board is fine | Ask for permission to run the command outside the sandbox and repeat it. Do not blame the cable |
+| No drive and no `usbmodem` device | The board is not connected, the cable carries no data, or the board runs other firmware without USB | Ask the user to reconnect it with a data cable, try another port and repeat the checks. If there is still nothing, ask them to hold BOOT while plugging in, then go to step 3 |
 
 If the user explicitly asks to reinstall or upgrade the firmware, go to step 3 even when MicroPython answers.
 
@@ -47,6 +51,8 @@ This is for a brand-new board, a board without MicroPython, or an upgrade the us
 ## 4. Deploy the apps
 
 Run `./deploy.sh --apps`. It copies `launcher.py` as `main.py`, then `lib/` and `apps/`, resets the saved app so the board starts on the first one, prints the file lists and restarts the board. The script prints every command it runs. Summarise the result and ignore the "File exists" lines from `mkdir`, which are harmless.
+
+If a command fails to reach the board in the sandbox, ask for permission to run it outside the sandbox and repeat it.
 
 ## 5. Verify
 

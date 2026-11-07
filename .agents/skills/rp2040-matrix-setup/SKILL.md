@@ -69,11 +69,15 @@ mpremote --version
 
 ## 4. Find the board
 
-Run:
+Run these checks:
 
 ```bash
+ls /Volumes/RPI-RP2
 mpremote connect list
 ```
+
+If `/Volumes/RPI-RP2` exists, the board is in firmware mode.
+Stop here and continue with `/rp2040-matrix-deploy`.
 
 A board running MicroPython should appear as a USB serial device,
 typically `/dev/cu.usbmodem101` on macOS.
@@ -83,9 +87,6 @@ If no device appears:
 - Make sure the USB cable supports data.
 - Try another USB port.
 - Retry the command.
-
-If `/Volumes/RPI-RP2` exists, the board is in firmware mode.
-Stop here and continue with `/rp2040-matrix-deploy`.
 
 If multiple devices appear, ask the user to disconnect other serial
 devices so the correct board can be identified.
@@ -109,6 +110,8 @@ If the port is busy, ask the user to close other serial applications
 such as Thonny, a serial monitor or another mpremote session.
 
 If there is no response, ask the user to press RESET and retry once.
+
+If `mpremote connect list` showed the board but `mpremote exec` says "no device found", your command sandbox is blocking the serial port. Ask for permission to run it outside the sandbox and repeat it before suggesting a cable problem.
 
 ## 6. Set up preview tooling
 
