@@ -49,7 +49,9 @@ Press BOOT to step through the apps in this order.
 
 ## Developers
 
-This repo is built to be used with an AI coding agent that supports [Agent Skills](https://agentskills.io), such as GitHub Copilot. You also need macOS, the board and a USB Type-C data cable.
+This repo is built to be used with an AI coding agent that supports [Agent Skills](https://agentskills.io). The skills have been tested using GitHub Copilot CLI, OpenAI Codex CLI and Cursor Agent CLI.
+
+You also need macOS, an RP2040-Matrix board and a USB Type-C data cable.
 
 ```bash
 git clone https://github.com/adob71/rp2040-matrix-apps.git && cd rp2040-matrix-apps
