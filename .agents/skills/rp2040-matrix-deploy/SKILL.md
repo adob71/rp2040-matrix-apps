@@ -56,7 +56,7 @@ If a command fails to reach the board in the sandbox, ask for permission to run 
 
 ## 5. Verify
 
-- Compare `mpremote fs ls :apps` with `ls apps/*.py` and report any app missing on the board.
+- The file lists that `deploy.sh` prints are enough to compare the board with `apps/`. Report any app missing on the board. Run `mpremote fs ls :apps` yourself only if the output was cut off or unclear.
 - The script copies files but never deletes them. A file on the board with no match in `apps/` or `lib/`, for example an app that was renamed or removed, is stale. List such files and offer to remove them with `mpremote fs rm :apps/<name>.py`. Ask before removing anything.
 - Check that every name in the `APPS` list in `launcher.py` has a file in `apps/`.
 - Ask the user to look at the board. The first app should be running, and BOOT should step to the next one.
