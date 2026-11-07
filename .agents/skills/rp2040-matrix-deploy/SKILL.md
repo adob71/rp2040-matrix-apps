@@ -1,12 +1,12 @@
 ---
-name: rp2040-deploy
+name: rp2040-matrix-deploy
 description: >-
   Deploys the RP2040-Matrix apps to the board on macOS. Installs MicroPython
   firmware on a brand-new board (rare, needs BOOT held while plugging in) and
   copies the launcher, library and apps with deploy.sh. Use when the user wants
   to deploy, upload, flash, install firmware, update the board or see a new or
   changed app on the board, and after adding or editing an app. Needs the setup
-  from rp2040-setup to be done first.
+  from rp2040-matrix-setup to be done first.
 compatibility: macOS, mpremote and an RP2040-Matrix board connected over USB with a data cable.
 ---
 
@@ -16,7 +16,7 @@ Put the launcher, the library and the apps of this repository on the board. Work
 
 ## 1. Check the basics
 
-Check that `deploy.sh`, `launcher.py`, `apps/` and `lib/` exist, and that `command -v mpremote` finds mpremote. If mpremote is missing, stop and send the user to `/rp2040-setup`.
+Check that `deploy.sh`, `launcher.py`, `apps/` and `lib/` exist, and that `command -v mpremote` finds mpremote. If mpremote is missing, stop and send the user to `/rp2040-matrix-setup`.
 
 ## 2. Find out what state the board is in
 
@@ -71,5 +71,5 @@ The board then starts on that app until the next deploy.
 - Never run `./deploy.sh --firmware` without an explicit yes from the user and without `/Volumes/RPI-RP2` present.
 - Never delete files from the board without asking.
 - Do not run `mpremote repl`. It keeps the USB port busy and blocks later commands. If a command reports a busy port, ask the user to close other serial programs such as Thonny, a serial monitor or another mpremote session.
-- If the board shows nothing after a deploy, ask the user to press RESET. If it stays dark, suggest running `/rp2040-setup` again.
+- If the board shows nothing after a deploy, ask the user to press RESET. If it stays dark, suggest running `/rp2040-matrix-setup` again.
 - To upgrade MicroPython, replace the `.uf2` file in `firmware/` and update `FIRMWARE_FILE` at the top of `deploy.sh`.

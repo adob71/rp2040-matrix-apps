@@ -59,9 +59,9 @@ Open your agent in the folder and ask for what you want. It picks the matching s
 
 | Say | Skill |
 |---|---|
-| "Set up my computer for this repo" | `rp2040-setup` |
-| "Deploy to my board" | `rp2040-deploy` |
-| "Add an app that shows a traffic light" | `rp2040-add-app` |
+| "Set up my computer for this repo" | `rp2040-matrix-setup` |
+| "Deploy to my board" | `rp2040-matrix-deploy` |
+| "Add an app that shows a traffic light" | `rp2040-matrix-add-app` |
 
 No AI coding agent? The skills in `.agents/skills/` are plain step-by-step instructions you can follow by hand.
 

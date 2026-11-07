@@ -1,5 +1,5 @@
 ---
-name: rp2040-add-app
+name: rp2040-matrix-add-app
 description: >-
   Adds a new app to the RP2040-Matrix apps repository from the user's description.
   Writes apps/<name>.py with the ws2812 and touch libraries, registers it in
@@ -8,9 +8,9 @@ description: >-
   README. Use whenever the user wants to add, create, write, make or build an app,
   animation, game or LED pattern for the board, or to change an existing app, for
   example "make an app that shows a traffic light", even when they do not mention
-  the repository structure. It never touches the board. Use rp2040-deploy to put
+  the repository structure. It never touches the board. Use rp2040-matrix-deploy to put
   the app on the board.
-compatibility: Needs Python 3 and the .venv with Pillow created by rp2040-setup. Does not need the board.
+compatibility: Needs Python 3 and the .venv with Pillow created by rp2040-matrix-setup. Does not need the board.
 ---
 
 # Add an app to the RP2040-Matrix repository
@@ -38,7 +38,7 @@ Read `references/app-guide.md`, then the existing app closest to the request: `a
 
 ## 5. Test it on the computer
 
-Run `.venv/bin/python tools/make_gif.py <name>`. If `.venv` does not exist, tell the user to run `rp2040-setup` and stop here. The tool runs the app with stand-in libraries and writes `gifs/<name>.gif`.
+Run `.venv/bin/python tools/make_gif.py <name>`. If `.venv` does not exist, tell the user to run `rp2040-matrix-setup` and stop here. The tool runs the app with stand-in libraries and writes `gifs/<name>.gif`.
 
 - A traceback is a bug in the app. Fix it and run again.
 - An `AttributeError` or `ModuleNotFoundError` means the app uses something the preview does not support, such as `machine`, `time.sleep_us` or `pad.touched`. Switch to a supported call (see the guide) before touching the tool.
@@ -59,7 +59,7 @@ The description is short, starts with a capital letter, has no full stop and use
 
 ## 7. Report and hand over
 
-Summarise the changed files: `apps/<name>.py`, `launcher.py`, `tools/make_gif.py`, `gifs/<name>.gif` and `README.md`. State the app's position in `APPS` counting from 0. Offer to put it on the board with `rp2040-deploy`, which can jump straight to it. Do not deploy and do not commit unless the user asks.
+Summarise the changed files: `apps/<name>.py`, `launcher.py`, `tools/make_gif.py`, `gifs/<name>.gif` and `README.md`. State the app's position in `APPS` counting from 0. Offer to put it on the board with `rp2040-matrix-deploy`, which can jump straight to it. Do not deploy and do not commit unless the user asks.
 
 ## Rules
 

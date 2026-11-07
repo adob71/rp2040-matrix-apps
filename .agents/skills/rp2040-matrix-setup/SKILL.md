@@ -1,5 +1,5 @@
 ---
-name: rp2040-setup
+name: rp2040-matrix-setup
 description: >-
   One-time setup of the macOS development environment for the RP2040-Matrix
   apps repository. Installs mpremote using Homebrew, checks the repository,
@@ -12,8 +12,8 @@ compatibility: macOS, Homebrew, Python 3 and an RP2040-Matrix board connected ov
 
 # Set up the RP2040-Matrix development environment
 
-The goal is a working macOS development environment ready for `/rp2040-deploy`
-and `/rp2040-add-app`.
+The goal is a working macOS development environment ready for `/rp2040-matrix-deploy`
+and `/rp2040-matrix-add-app`.
 
 Keep the setup simple and follow the steps in order. Stop at the first failure.
 Run commands yourself and ask before installing software or interrupting a
@@ -85,7 +85,7 @@ If no device appears:
 - Retry the command.
 
 If `/Volumes/RPI-RP2` exists, the board is in firmware mode.
-Stop here and continue with `/rp2040-deploy`.
+Stop here and continue with `/rp2040-matrix-deploy`.
 
 If multiple devices appear, ask the user to disconnect other serial
 devices so the correct board can be identified.
@@ -142,5 +142,5 @@ Give a short summary:
 
 Next steps:
 
-1. `/rp2040-deploy` — install firmware if needed and deploy the apps.
-2. `/rp2040-add-app <description>` — create a new application.
+1. `/rp2040-matrix-deploy` — install firmware if needed and deploy the apps.
+2. `/rp2040-matrix-add-app <description>` — create a new application.

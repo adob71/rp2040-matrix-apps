@@ -13,14 +13,14 @@ Little MicroPython apps for the Waveshare RP2040-Matrix, a board with a 5×5 RGB
 
 Use the skills in `.agents/skills/` for these tasks instead of improvising:
 
-- `rp2040-setup` installs the tools and checks the USB connection, once per computer.
-- `rp2040-add-app` adds an app and its preview. The app rules are in `.agents/skills/rp2040-add-app/references/app-guide.md`.
-- `rp2040-deploy` flashes the firmware on a new board and deploys the apps.
+- `rp2040-matrix-setup` installs the tools and checks the USB connection, once per computer.
+- `rp2040-matrix-add-app` adds an app and its preview. The app rules are in `.agents/skills/rp2040-matrix-add-app/references/app-guide.md`.
+- `rp2040-matrix-deploy` flashes the firmware on a new board and deploys the apps.
 
 ## Rules
 
 - Apps import only `time`, `ws2812`, `touch`, `random` and `math`, and sleep on every pass of their main loop. They never read the BOOT button or use `machine` or `rp2`.
 - The `APPS` list in `launcher.py` and the table in `README.md` stay in alphabetical order.
 - Ask before running `./deploy.sh --firmware` or deleting files on the board. Never leave `mpremote repl` open.
-- Do not commit unless asked. Keep commit messages short and specific, such as `feat: add rp2040-deploy skill`.
+- Do not commit unless asked. Keep commit messages short and specific, such as `feat: add rp2040-matrix-deploy skill`.
 - The README is for users and is written in British English ("colours"). Keep it short.
