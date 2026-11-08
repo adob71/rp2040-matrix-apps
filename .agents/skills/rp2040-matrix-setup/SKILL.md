@@ -43,6 +43,7 @@ Run:
 
 ```bash
 command -v brew
+brew --version
 ```
 
 If Homebrew is missing, stop and explain that Homebrew is required.
@@ -52,19 +53,28 @@ If Homebrew is missing, stop and explain that Homebrew is required.
 Check:
 
 ```bash
+brew list --versions mpremote
 command -v mpremote
+mpremote --version
 ```
 
-If missing, ask the user for permission and install:
+On Apple Silicon, the expected executable is /opt/homebrew/bin/mpremote, installed and managed by Homebrew.
+
+If Homebrew does not have mpremote installed, ask the user for permission and install:
 
 ```bash
 brew install mpremote
 ```
 
+If mpremote exists but is not the Homebrew version, explain the conflict and ask before changing or uninstalling anything. Do not use pip or pipx.
+
 Verify:
 
 ```bash
+brew list --versions mpremote
+command -v mpremote
 mpremote --version
+test "$(command -v mpremote)" = "$(brew --prefix)/bin/mpremote"
 ```
 
 ## 4. Find the board
@@ -72,12 +82,15 @@ mpremote --version
 Run these checks:
 
 ```bash
-ls /Volumes/RPI-RP2
-mpremote connect list
+if [ -d /Volumes/RPI-RP2 ]; then
+    echo "RP2040 BOOTSEL mass-storage mode detected"
+else
+    echo "RP2040 firmware volume not detected"
+    mpremote connect list
+fi
 ```
 
-If `/Volumes/RPI-RP2` exists, the board is in firmware mode.
-Stop here and continue with `/rp2040-matrix-deploy`.
+If /Volumes/RPI-RP2 exists, the board is in BOOTSEL mass-storage mode. Do not continue with serial detection or MicroPython verification. Stop here and continue with /rp2040-matrix-deploy to install or update MicroPython firmware.
 
 A board running MicroPython should appear as a USB serial device,
 typically `/dev/cu.usbmodem101` on macOS.
@@ -93,15 +106,16 @@ devices so the correct board can be identified.
 
 ## 5. Verify MicroPython
 
-Before executing anything on the board, explain that connecting or
-executing commands may interrupt the running application.
-
-Ask permission if necessary.
+Before running mpremote exec, explain that it may soft-reset the board and interrupt the running application. Ask permission every time before running it.
 
 Run:
 
+Use the actual USB serial port identified in Step 4. Do not assume a fixed port name.
+
+For example, if the detected port is `/dev/cu.usbmodem101`:
+
 ```bash
-mpremote exec "import sys; print(sys.version)"
+mpremote connect /dev/cu.usbmodem101 exec "import sys; print(sys.version)"
 ```
 
 The output must identify MicroPython and show its version.
@@ -115,17 +129,26 @@ If `mpremote connect list` showed the board but `mpremote exec` says "no device 
 
 ## 6. Set up preview tooling
 
-The preview tool runs applications on the Mac and generates GIF previews
-without requiring the physical board.
+The preview tool runs applications on the Mac and generates GIF previews without requiring the physical board.
 
-Check whether Pillow is already available.
-
-If not, ask permission before creating the virtual environment
-or installing dependencies.
+Check whether the repository-local virtual environment exists and Pillow is available:
 
 ```bash
-python3 -m venv .venv
-.venv/bin/pip install pillow
+if [ -x .venv/bin/python ]; then
+    .venv/bin/python -c "import PIL; print(PIL.__version__)"
+else
+    echo "Preview environment not ready"
+fi
+```
+
+If the environment or Pillow is missing, ask permission before creating the virtual environment or installing dependencies.
+
+```bash
+if [ ! -x .venv/bin/python ]; then
+    python3 -m venv .venv
+fi
+
+.venv/bin/python -m pip install pillow
 ```
 
 Verify:
@@ -134,13 +157,17 @@ Verify:
 .venv/bin/python -c "import PIL; print(PIL.__version__)"
 ```
 
+Do not install Pillow globally or use Homebrew for this dependency.
+
 ## 7. Report
 
-Give a short summary:
+Give a short summary of the actual results:
 
-- Repository: ready
-- mpremote: installed, show path
-- Board: detected, show USB port and MicroPython version
+- Repository: ready or missing
+- Homebrew: available or missing
+- mpremote: installed, show version and executable path
+- Board: detected or not detected, show USB port
+- MicroPython: verified with version, not verified, or unavailable
 - Preview tooling: ready or not installed
 
 Next steps:
