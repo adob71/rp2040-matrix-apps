@@ -106,9 +106,7 @@ devices so the correct board can be identified.
 
 ## 5. Verify MicroPython
 
-Before running mpremote exec, explain that it may soft-reset the board and interrupt the running application. Ask permission every time before running it.
-
-Run:
+Before running `mpremote exec`, explain that it may soft-reset the board and interrupt the running application. Ask permission every time before running it.
 
 Use the actual USB serial port identified in Step 4. Do not assume a fixed port name.
 
@@ -120,12 +118,14 @@ mpremote connect /dev/cu.usbmodem101 exec "import sys; print(sys.version)"
 
 The output must identify MicroPython and show its version.
 
-If the port is busy, ask the user to close other serial applications
-such as Thonny, a serial monitor or another mpremote session.
-
+If the command reports that the port is busy or cannot be accessed:
+1. Ask permission to retry the same command outside the command sandbox.
+2. If it still fails, ask the user to run lsof /dev/cu.usbmodem101 in macOS Terminal. Replace the example port with the actual detected port.
+3. If lsof returns no process, ask the user to retry the version check directly in Terminal.
+4. If a process is identified, ask the user to close the corresponding application before retrying.
 If there is no response, ask the user to press RESET and retry once.
 
-If `mpremote connect list` showed the board but `mpremote exec` says "no device found", your command sandbox is blocking the serial port. Ask for permission to run it outside the sandbox and repeat it before suggesting a cable problem.
+Do not report MicroPython as verified unless the version check succeeds.
 
 ## 6. Set up preview tooling
 
