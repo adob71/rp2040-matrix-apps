@@ -15,9 +15,9 @@ compatibility: macOS, Homebrew, Python 3 and an RP2040-Matrix board connected ov
 The goal is a working macOS development environment ready for `/rp2040-matrix-deploy`
 and `/rp2040-matrix-add-app`.
 
-Keep the setup simple and follow the steps in order. Stop at the first failure.
-Run commands yourself and ask before installing software or interrupting a
-running application.
+Keep the setup simple and follow the steps in order. Stop at the first failure
+unless a step says to continue. Run commands yourself and ask before installing
+software or interrupting a running application.
 
 This skill is for macOS only. Do not attempt Linux, Windows or WSL setup.
 
@@ -48,25 +48,22 @@ brew --version
 
 If Homebrew is missing, stop and explain that Homebrew is required.
 
-## 3. Install mpremote
+## 3. Install mpremote with Homebrew
+
+In this project Homebrew manages mpremote. Never install it with pip or pipx.
 
 Check:
 
 ```bash
 brew list --versions mpremote
-command -v mpremote
+which -a mpremote
 mpremote --version
 ```
 
-On Apple Silicon, the expected executable is /opt/homebrew/bin/mpremote, installed and managed by Homebrew.
+Homebrew installs it in `$(brew --prefix)/bin`, which is `/opt/homebrew/bin` on Apple Silicon.
 
-If Homebrew does not have mpremote installed, ask the user for permission and install:
-
-```bash
-brew install mpremote
-```
-
-If mpremote exists but is not the Homebrew version, explain the conflict and ask before changing or uninstalling anything. Do not use pip or pipx.
+- Homebrew does not have mpremote and no other copy exists: ask for permission, then run `brew install mpremote`.
+- Another copy comes first in the `which -a` list, for example under `~/.local/bin` from pip or pipx: explain the conflict and show both paths. Ask before changing anything. If the user agrees to remove the other copy, use the tool that installed it, such as `pipx uninstall mpremote` or `python3 -m pip uninstall mpremote`.
 
 Verify:
 
@@ -79,7 +76,7 @@ test "$(command -v mpremote)" = "$(brew --prefix)/bin/mpremote"
 
 ## 4. Find the board
 
-Run these checks:
+Run:
 
 ```bash
 if [ -d /Volumes/RPI-RP2 ]; then
@@ -90,25 +87,18 @@ else
 fi
 ```
 
-If /Volumes/RPI-RP2 exists, the board is in BOOTSEL mass-storage mode. Do not continue with serial detection or MicroPython verification. Stop here and continue with /rp2040-matrix-deploy to install or update MicroPython firmware.
+`mpremote connect list` always shows two built-in macOS entries, `/dev/cu.Bluetooth-Incoming-Port` and `/dev/cu.debug-console`. Ignore them. Only a `usbmodem` device is the board.
 
-A board running MicroPython should appear as a USB serial device,
-typically `/dev/cu.usbmodem101` on macOS.
-
-If no device appears:
-- Check that the board is connected.
-- Make sure the USB cable supports data.
-- Try another USB port.
-- Retry the command.
-
-If multiple devices appear, ask the user to disconnect other serial
-devices so the correct board can be identified.
+- `/Volumes/RPI-RP2` exists: the board is in firmware mode, which is how a new board starts. Skip step 5 because nothing answers over serial yet, continue with step 6, and report in step 7 that MicroPython is not installed yet and that `/rp2040-matrix-deploy` installs it.
+- A `usbmodem` device is listed: this is the board. Continue with step 5.
+- No `usbmodem` device and no `RPI-RP2` drive: check that the board is connected, that the USB cable carries data, and try another port, then run the command again. If there is still nothing, ask the user to hold BOOT while plugging the board in, which puts it in firmware mode.
+- More than one `usbmodem` device: ask which one is the board, and ask the user to unplug the others.
 
 ## 5. Verify MicroPython
 
 Before running `mpremote exec`, explain that it may soft-reset the board and interrupt the running application. Ask permission every time before running it.
 
-Use the actual USB serial port identified in Step 4. Do not assume a fixed port name.
+Use the actual USB serial port identified in step 4. Do not assume a fixed port name.
 
 For example, if the detected port is `/dev/cu.usbmodem101`:
 
@@ -118,11 +108,12 @@ mpremote connect /dev/cu.usbmodem101 exec "import sys; print(sys.version)"
 
 The output must identify MicroPython and show its version.
 
-If the command reports that the port is busy or cannot be accessed:
+If the command says "no device found", "failed to access" or that the port is busy, your command sandbox is probably blocking the serial port, because the board was just listed:
 1. Ask permission to retry the same command outside the command sandbox.
-2. If it still fails, ask the user to run lsof /dev/cu.usbmodem101 in macOS Terminal. Replace the example port with the actual detected port.
-3. If lsof returns no process, ask the user to retry the version check directly in Terminal.
+2. If it still fails, ask the user to run `lsof /dev/cu.usbmodem101` in macOS Terminal. Replace the example port with the actual detected port.
+3. If `lsof` returns no process, ask the user to retry the version check directly in Terminal.
 4. If a process is identified, ask the user to close the corresponding application before retrying.
+
 If there is no response, ask the user to press RESET and retry once.
 
 Do not report MicroPython as verified unless the version check succeeds.
@@ -151,6 +142,8 @@ fi
 .venv/bin/python -m pip install pillow
 ```
 
+If pip cannot reach the network because of your command sandbox, for example with "Failed to resolve pypi.org", ask permission to use the network and repeat the install.
+
 Verify:
 
 ```bash
@@ -166,8 +159,8 @@ Give a short summary of the actual results:
 - Repository: ready or missing
 - Homebrew: available or missing
 - mpremote: installed, show version and executable path
-- Board: detected or not detected, show USB port
-- MicroPython: verified with version, not verified, or unavailable
+- Board: detected (show the USB port), in firmware mode, or not detected
+- MicroPython: verified with version, not installed yet, not verified, or unavailable
 - Preview tooling: ready or not installed
 
 Next steps:
