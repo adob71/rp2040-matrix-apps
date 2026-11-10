@@ -21,6 +21,8 @@ software or interrupting a running application.
 
 This skill is for macOS only. Do not attempt Linux, Windows or WSL setup.
 
+If a command fails because your command sandbox blocks the network, USB access or files outside the repository, ask permission to run it outside the sandbox and repeat it.
+
 ## 1. Check the repository
 
 Check that the current directory contains:
@@ -55,9 +57,9 @@ In this project Homebrew manages mpremote. Never install it with pip or pipx.
 Check:
 
 ```bash
-brew list --versions mpremote
-which -a mpremote
-mpremote --version
+brew list --versions mpremote 2>/dev/null || true
+which -a mpremote 2>/dev/null || true
+mpremote --version 2>/dev/null || true
 ```
 
 Homebrew installs it in `$(brew --prefix)/bin`, which is `/opt/homebrew/bin` on Apple Silicon.
@@ -89,7 +91,7 @@ fi
 
 `mpremote connect list` always shows two built-in macOS entries, `/dev/cu.Bluetooth-Incoming-Port` and `/dev/cu.debug-console`. Ignore them. Only a `usbmodem` device is the board.
 
-- `/Volumes/RPI-RP2` exists: the board is in firmware mode, which is how a new board starts. Skip step 5 because nothing answers over serial yet, continue with step 6, and report in step 7 that MicroPython is not installed yet and that `/rp2040-matrix-deploy` installs it.
+- `/Volumes/RPI-RP2` exists: the board is in firmware/BOOTSEL mode. Skip step 5 because nothing answers over serial yet, continue with step 6, and report in step 7 that MicroPython is not installed yet and that `/rp2040-matrix-deploy` installs it.
 - A `usbmodem` device is listed: this is the board. Continue with step 5.
 - No `usbmodem` device and no `RPI-RP2` drive: check that the board is connected, that the USB cable carries data, and try another port, then run the command again. If there is still nothing, ask the user to hold BOOT while plugging the board in, which puts it in firmware mode.
 - More than one `usbmodem` device: ask which one is the board, and ask the user to unplug the others.
@@ -114,7 +116,7 @@ If the command says "no device found", "failed to access" or that the port is bu
 3. If `lsof` returns no process, ask the user to retry the version check directly in Terminal.
 4. If a process is identified, ask the user to close the corresponding application before retrying.
 
-If there is no response, ask the user to press RESET and retry once.
+If the board stops responding during the check, ask the user to press RESET and retry once.
 
 Do not report MicroPython as verified unless the version check succeeds.
 
@@ -141,8 +143,6 @@ fi
 
 .venv/bin/python -m pip install pillow
 ```
-
-If pip cannot reach the network because of your command sandbox, for example with "Failed to resolve pypi.org", ask permission to use the network and repeat the install.
 
 Verify:
 
