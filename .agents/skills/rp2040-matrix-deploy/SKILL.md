@@ -54,18 +54,23 @@ This is for a brand-new board, a board without MicroPython, or an upgrade the us
 
 1. Ask the user to put the board in firmware mode: unplug the USB cable, hold the BOOT button, plug the cable in, then release BOOT. Wait for their confirmation, then check `ls /Volumes/RPI-RP2`. If the drive does not appear, try another cable or port, and make sure BOOT is held while plugging in.
 2. Run `./deploy.sh --firmware`. It copies the `.uf2` file from `firmware/` to the board, waits up to ten seconds for the board to restart and lists its files. macOS may show a "disk not ejected properly" notice, which can be ignored.
-3. If the script says the board did not come back, wait a few seconds and repeat the MicroPython check from step 2. If it still does not answer, ask the user to unplug and replug the board.
+
+If the output contains `Operation not permitted` or another copy error, the command sandbox may be blocking access to the firmware volume. Ask permission to run the command outside the sandbox and repeat it. Do not troubleshoot this as a board restart problem.
+
+3. If the script reports that the board did not come back and there was no firmware copy error, wait a few seconds and repeat the MicroPython check from step 2. If the board still does not respond, ask the user to unplug and reconnect it.
 4. Continue with step 4.
 
 ## 4. Deploy the apps
 
 Run `./deploy.sh --apps`. It copies `launcher.py` as `main.py`, then `lib/` and `apps/`, resets the saved app so the board starts on the first one, prints the file lists and restarts the board. The script prints every command it runs. Summarise the result and ignore the "File exists" lines from `mkdir`, which are harmless.
 
-If a command fails to reach the board in the sandbox, ask for permission to run it outside the sandbox and repeat it.
+Check the command exit status and output. The script exits with a non-zero status if a required deployment command fails. If deployment fails, check the USB connection and whether the command sandbox can access the serial port. Ask permission to retry outside the sandbox if necessary.
+
+Report success only after confirming that the launcher, `lib/` and the apps are present on the board.
 
 ## 5. Verify
 
-- The file lists that `deploy.sh` prints are enough to compare the board with `apps/`. Report any app missing on the board. Run `mpremote fs ls :apps` yourself only if the output was cut off or unclear.
+- Compare the printed `:apps` and `:lib` file lists with the repository. Report missing files. Run `mpremote fs ls :apps` or `mpremote fs ls :lib` yourself only if the output was cut off or unclear.
 - The script copies files but never deletes them. A file on the board with no match in `apps/` or `lib/`, for example an app that was renamed or removed, is stale. List such files and offer to remove them with `mpremote fs rm :apps/<name>.py`. Ask before removing anything.
 - Check that every name in the `APPS` list in `launcher.py` has a file in `apps/`.
 - Ask the user to look at the board. The first app should be running, and BOOT should step to the next one.

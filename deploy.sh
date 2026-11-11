@@ -17,14 +17,17 @@ firmware() {
         exit 1
     fi
 
-    cp "$FIRMWARE_FILE" "$BOOT_VOLUME/"
+    cp "$FIRMWARE_FILE" "$BOOT_VOLUME/" || {
+        echo "Could not copy the firmware to $BOOT_VOLUME."
+        exit 1
+    }
 
     # the board reboots by itself after the copy: wait until mpremote can talk to it
     echo "Waiting for the board to restart..."
     for i in 1 2 3 4 5 6 7 8 9 10; do
         sleep 1
         if mpremote exec "pass" >/dev/null 2>&1; then
-            mpremote fs ls
+            mpremote fs ls || exit 1
             echo
             return
         fi
@@ -34,26 +37,31 @@ firmware() {
 }
 
 apps() {
-    mpremote fs cp launcher.py :main.py
+    mpremote exec "pass" >/dev/null 2>&1 || {
+        echo "No board found over USB. Connect it, or run --firmware if it has no MicroPython."
+        exit 1
+    }
 
-    mpremote exec "open('app_index','w').write('0')"
+    mpremote fs cp launcher.py :main.py || exit 1
 
-    mpremote fs mkdir :lib
-    mpremote fs cp lib/*.py :lib/
+    mpremote exec "open('app_index','w').write('0')" || exit 1
 
-    mpremote fs mkdir :apps
-    mpremote fs cp apps/*.py :apps/
+    mpremote fs mkdir :lib || mpremote fs ls :lib >/dev/null || exit 1
+    mpremote fs cp lib/*.py :lib/ || exit 1
 
-    mpremote fs ls
+    mpremote fs mkdir :apps || mpremote fs ls :apps >/dev/null || exit 1
+    mpremote fs cp apps/*.py :apps/ || exit 1
+
+    mpremote fs ls || exit 1
     echo
 
-    mpremote fs ls :lib
+    mpremote fs ls :lib || exit 1
     echo
 
-    mpremote fs ls :apps
+    mpremote fs ls :apps || exit 1
     echo
 
-    mpremote reset
+    mpremote reset || exit 1
 }
 
 # ---- main ----
