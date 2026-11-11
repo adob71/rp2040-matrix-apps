@@ -13,9 +13,20 @@ description: >-
 compatibility: Needs Python 3 and the .venv with Pillow created by rp2040-matrix-setup. Does not need the board.
 ---
 
-# Add an app to the RP2040-Matrix repository
+# Add an app to the RP2040-Matrix
 
-Turn the user's description into a working app: write the file, register it, test it on the computer, create its preview and README row, then offer to deploy. Read `references/app-guide.md` before writing any code. It has the library calls, the rules every app follows and four starting patterns. Work from the repository root and do not touch the board in this skill.
+The goal is to create a new RP2040-Matrix app, generate its local GIF preview
+and update the app list and README.
+
+Keep the implementation simple and follow the steps in order. Stop at the first
+failure unless a step says to continue. Run commands yourself and ask before
+installing software. Do not connect to, reset or modify the board from this skill.
+
+This skill is for macOS only. Do not attempt Linux, Windows or WSL setup.
+
+If a command fails because your command sandbox blocks the network, USB access
+or files outside the repository, ask permission to run it outside the sandbox
+and repeat it.
 
 ## 1. Understand the request
 
