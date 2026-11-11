@@ -4,7 +4,7 @@
 
 Plug it into a USB port and it starts by itself.
 
-This project runs on the [Waveshare RP2040-Matrix](https://www.waveshare.com/rp2040-matrix.htm), a development board by Waveshare built around the [Raspberry Pi RP2040](https://pip-assets.raspberrypi.com/categories/814-rp2040/documents/RP-008371-DS-1-rp2040-datasheet.pdf) microcontroller.
+This project runs on the [Waveshare RP2040-Matrix](https://www.waveshare.com/rp2040-matrix.htm), a development board built around the [Raspberry Pi RP2040](https://pip-assets.raspberrypi.com/categories/814-rp2040/documents/RP-008371-DS-1-rp2040-datasheet.pdf) microcontroller.
 
 ## The board
 
@@ -59,11 +59,11 @@ git clone https://github.com/adob71/rp2040-matrix-apps.git && cd rp2040-matrix-a
 
 Open your agent in the folder and ask for what you want. It picks the matching skill:
 
-| Say | Skill |
+| Prompt | Skill |
 |---|---|
-| "Set up my computer for this repo" | `rp2040-matrix-setup` |
-| "Deploy to my board" | `rp2040-matrix-deploy` |
-| "Add an app that shows a traffic light" | `rp2040-matrix-add-app` |
+| Set up my computer for this repo | `rp2040-matrix-setup` |
+| Deploy to my board | `rp2040-matrix-deploy` |
+| Add an app that shows a traffic light | `rp2040-matrix-add-app` |
 
 No AI coding agent? The skills in `.agents/skills/` are plain step-by-step instructions you can follow by hand.
 
