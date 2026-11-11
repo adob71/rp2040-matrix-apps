@@ -49,14 +49,58 @@ Read `references/app-guide.md`, then the existing app closest to the request: `a
 
 ## 5. Test it on the computer
 
-Run `.venv/bin/python tools/make_gif.py <name>`. If `.venv` does not exist, tell the user to run `rp2040-matrix-setup` and stop here. The tool runs the app with stand-in libraries and writes `gifs/<name>.gif`.
+The preview generator needs Pillow from the repository's `.venv`. Check the
+environment before running it:
 
-- A traceback is a bug in the app. Fix it and run again.
-- An `AttributeError` or `ModuleNotFoundError` means the app uses something the preview does not support, such as `machine`, `time.sleep_us` or `pad.touched`. Switch to a supported call (see the guide) before touching the tool.
-- If the command is still running after about 20 seconds, stop it. The main loop never sleeps, so the fake clock never advances.
-- Read the output line. An animation should show more than one frame, and the total time should be close to `ms`. A single frame from an animation usually means the loop never changes what it shows.
+- If `.venv/bin/python` is missing or not executable, tell the user to run
+  `rp2040-matrix-setup` and stop.
+- Verify that Pillow can be imported using the same Python interpreter that
+  runs the preview generator. If the first import check fails, retry it once.
+- If the second check fails, tell the user that Pillow is unavailable in
+  `.venv`, recommend running `rp2040-matrix-setup`, and stop. Do not install
+  packages automatically.
 
-Then ask the user to look at the result with `open gifs/<name>.gif` and say whether it matches what they pictured. Adjust until they are happy.
+Run the import check:
+
+```bash
+PYTHON=".venv/bin/python"
+
+if [ ! -x "$PYTHON" ]; then
+    echo "Virtual environment not found. Run rp2040-matrix-setup first."
+    exit 1
+fi
+
+if ! "$PYTHON" -c "from PIL import Image, ImageChops, ImageDraw, ImageFilter" >/dev/null 2>&1 &&
+   ! "$PYTHON" -c "from PIL import Image, ImageChops, ImageDraw, ImageFilter" >/dev/null 2>&1; then
+    echo "Pillow is unavailable in .venv. Run rp2040-matrix-setup first."
+    exit 1
+fi
+```
+
+Then generate the preview:
+
+```bash
+.venv/bin/python tools/make_gif.py <name>
+```
+
+The tool runs the app with stand-in libraries and writes `gifs/<name>.gif`.
+
+- If the preview generator fails, inspect the traceback and identify whether
+  the problem is in the app, preview tool or environment. Fix the actual cause;
+  do not automatically treat every traceback as an app bug.
+- An `AttributeError` or `ModuleNotFoundError` may mean the app uses something
+  the preview does not support, such as `machine`, `time.sleep_us` or
+  `pad.touched`. Check the guide and switch to a supported call before
+  changing the tool.
+- If the command is still running after about 20 seconds, stop it. The main
+  loop may not sleep, so the fake clock never advances.
+- Read the output. An animation should show more than one frame, and the
+  total time should be close to `ms`. Identical consecutive frames may be
+  merged by the GIF generator, so the reported frame count does not
+  necessarily equal the number of animation states.
+
+Then ask the user to look at the result with `open gifs/<name>.gif` and say
+whether it matches what they pictured. Adjust until they are happy.
 
 ## 6. Add the README row
 
@@ -70,7 +114,7 @@ The description is short, starts with a capital letter, has no full stop and use
 
 ## 7. Report and hand over
 
-Summarise the changed files: `apps/<name>.py`, `launcher.py`, `tools/make_gif.py`, `gifs/<name>.gif` and `README.md`. State the app's position in `APPS` counting from 0. Offer to put it on the board with `rp2040-matrix-deploy`, which can jump straight to it. Do not deploy and do not commit unless the user asks.
+Summarise the changed files: `apps/<name>.py`, `launcher.py`, `tools/make_gif.py`, `gifs/<name>.gif` and `README.md`. State the app's position in `APPS` counting from 0. Offer to put it on the board with `rp2040-matrix-deploy`, which can deploy the app. Do not deploy and do not commit unless the user asks.
 
 ## Rules
 
