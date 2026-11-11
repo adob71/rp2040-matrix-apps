@@ -12,7 +12,16 @@ compatibility: macOS, mpremote and an RP2040-Matrix board connected over USB wit
 
 # Deploy to the RP2040-Matrix board
 
-Put the launcher, the library and the apps of this repository on the board. Work from the repository root, run commands yourself and stop at the first failure. Deploying restarts the board and stops the running app, which is expected. This skill is for macOS only.
+The goal is to install the repository firmware if needed and deploy the launcher,
+the library and the apps to the board.
+
+Keep the deployment simple and follow the steps in order. Stop at the first failure
+unless a step says to continue. Run commands yourself and ask before flashing
+firmware or interrupting a running application.
+
+This skill is for macOS only. Do not attempt Linux, Windows or WSL setup.
+
+If a command fails because your command sandbox blocks the network, USB access or files outside the repository, ask permission to run it outside the sandbox and repeat it.
 
 ## 1. Check the basics
 
