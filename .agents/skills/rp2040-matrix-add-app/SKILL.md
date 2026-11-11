@@ -49,18 +49,9 @@ Read `references/app-guide.md`, then the existing app closest to the request: `a
 
 ## 5. Test it on the computer
 
-The preview generator needs Pillow from the repository's `.venv`. Check the
-environment before running it:
+The preview generator requires Pillow in `.venv`.
 
-- If `.venv/bin/python` is missing or not executable, tell the user to run
-  `rp2040-matrix-setup` and stop.
-- Verify that Pillow can be imported using the same Python interpreter that
-  runs the preview generator. If the first import check fails, retry it once.
-- If the second check fails, tell the user that Pillow is unavailable in
-  `.venv`, recommend running `rp2040-matrix-setup`, and stop. Do not install
-  packages automatically.
-
-Run the import check:
+Check that the virtual environment exists and Pillow is available:
 
 ```bash
 PYTHON=".venv/bin/python"
@@ -70,14 +61,16 @@ if [ ! -x "$PYTHON" ]; then
     exit 1
 fi
 
-if ! "$PYTHON" -c "from PIL import Image, ImageChops, ImageDraw, ImageFilter" >/dev/null 2>&1 &&
-   ! "$PYTHON" -c "from PIL import Image, ImageChops, ImageDraw, ImageFilter" >/dev/null 2>&1; then
-    echo "Pillow is unavailable in .venv. Run rp2040-matrix-setup first."
-    exit 1
+if ! "$PYTHON" -c "from PIL import Image, ImageChops, ImageDraw, ImageFilter" >/dev/null 2>&1; then
+    echo "Pillow import failed. Retrying once..."
+    if ! "$PYTHON" -c "from PIL import Image, ImageChops, ImageDraw, ImageFilter" >/dev/null 2>&1; then
+        echo "Pillow is unavailable. Run rp2040-matrix-setup first."
+        exit 1
+    fi
 fi
 ```
 
-Then generate the preview:
+Generate the preview:
 
 ```bash
 .venv/bin/python tools/make_gif.py <name>
@@ -85,22 +78,18 @@ Then generate the preview:
 
 The tool runs the app with stand-in libraries and writes `gifs/<name>.gif`.
 
-- If the preview generator fails, inspect the traceback and identify whether
-  the problem is in the app, preview tool or environment. Fix the actual cause;
-  do not automatically treat every traceback as an app bug.
-- An `AttributeError` or `ModuleNotFoundError` may mean the app uses something
-  the preview does not support, such as `machine`, `time.sleep_us` or
-  `pad.touched`. Check the guide and switch to a supported call before
-  changing the tool.
-- If the command is still running after about 20 seconds, stop it. The main
-  loop may not sleep, so the fake clock never advances.
-- Read the output. An animation should show more than one frame, and the
-  total time should be close to `ms`. Identical consecutive frames may be
-  merged by the GIF generator, so the reported frame count does not
-  necessarily equal the number of animation states.
+- If generation fails, inspect the error and fix the actual cause. It may be an app, preview-tool or environment issue.
+- Check `app-guide.md` if the app uses unsupported calls such as `machine`, `time.sleep_us` or `pad.touched`.
+- Stop the command if it runs longer than 20 seconds; the app's main loop may not sleep.
+- Check that the output reports multiple frames and a duration close to `ms`. Identical consecutive frames may be merged.
 
-Then ask the user to look at the result with `open gifs/<name>.gif` and say
-whether it matches what they pictured. Adjust until they are happy.
+Open the GIF so the user can see it:
+
+```bash
+open "gifs/<name>.gif"
+```
+
+Do not substitute internal image inspection for opening the preview. Wait for the user to confirm whether it matches what they pictured. Adjust until they are happy.
 
 ## 6. Add the README row
 
