@@ -35,18 +35,18 @@ Press BOOT to step through the apps in this order.
 
 | Name | Description | Preview |
 |---|---|---|
-| avatar | Little patterns like GitHub avatars | ![avatar](gifs/avatar.gif) |
-| clock | Red hour hand and blue minute hand | ![clock](gifs/clock.gif) |
-| count | Counts 0 to 9 | ![count](gifs/count.gif) |
-| dice | Touch to roll, touch again to stop | ![dice](gifs/dice.gif) |
-| emoji | Touch to change the face | ![emoji](gifs/emoji.gif) |
-| eyes | A face that raises its eyebrows | ![eyes](gifs/eyes.gif) |
-| flag | Touch to raise the red flag | ![flag](gifs/flag.gif) |
-| heart | A beating heart | ![heart](gifs/heart.gif) |
-| life | Conway's Game of Life, a new random start each time | ![life](gifs/life.gif) |
-| name | Spells a name in random colours | ![name](gifs/name.gif) |
-| rain | Falling green digital rain | ![rain](gifs/rain.gif) |
-| stars | Twinkling stars | ![stars](gifs/stars.gif) |
+| avatar | Little patterns like GitHub avatars | <img src="gifs/avatar.gif" width="100" alt="avatar"> |
+| clock | Red hour hand and blue minute hand | <img src="gifs/clock.gif" width="100" alt="clock"> |
+| count | Counts 0 to 9 | <img src="gifs/count.gif" width="100" alt="count"> |
+| dice | Touch to roll, touch again to stop | <img src="gifs/dice.gif" width="100" alt="dice"> |
+| emoji | Touch to change the face | <img src="gifs/emoji.gif" width="100" alt="emoji"> |
+| eyes | A face that raises its eyebrows | <img src="gifs/eyes.gif" width="100" alt="eyes"> |
+| flag | Touch to raise the red flag | <img src="gifs/flag.gif" width="100" alt="flag"> |
+| heart | A beating heart | <img src="gifs/heart.gif" width="100" alt="heart"> |
+| life | Game of Life, a new random start each time | <img src="gifs/life.gif" width="100" alt="life"> |
+| name | Spells a name in random colours | <img src="gifs/name.gif" width="100" alt="name"> |
+| rain | Falling green digital rain | <img src="gifs/rain.gif" width="100" alt="rain"> |
+| stars | Twinkling stars | <img src="gifs/stars.gif" width="100" alt="stars"> |
 
 ## Developers
 
