@@ -33,7 +33,7 @@ This project runs on the [Waveshare RP2040-Matrix](https://www.waveshare.com/rp2
 
 Press BOOT to step through the apps in this order.
 
-| Name | Description | Preview | Video |
+| Name | Description | Preview | Demo |
 |---|---|---|---|
 | avatar | Little patterns like GitHub avatars | <img src="gifs/avatar.gif" width="100" alt="avatar"> | |
 | clock | Red hour hand and blue minute hand | <img src="gifs/clock.gif" width="100" alt="clock"> | |
@@ -42,10 +42,10 @@ Press BOOT to step through the apps in this order.
 | emoji | Touch to change the face | <img src="gifs/emoji.gif" width="100" alt="emoji"> | |
 | eyes | A face that raises its eyebrows | <img src="gifs/eyes.gif" width="100" alt="eyes"> | |
 | flag | Touch to raise the red flag | <img src="gifs/flag.gif" width="100" alt="flag"> | |
-| heart | A beating heart | <img src="gifs/heart.gif" width="100" alt="heart"> | <img src="videos/heart.gif" width="100" alt="heart video"> |
+| heart | A beating heart | <img src="gifs/heart.gif" width="100" alt="heart"> | [Demo](demo/heart.gif) |
 | life | Game of Life, a new random start each time | <img src="gifs/life.gif" width="100" alt="life"> | |
-| name | Spells a name in random colours | <img src="gifs/name.gif" width="100" alt="name"> | <img src="videos/name.gif" width="100" alt="name video"> |
-| rain | Falling green digital rain | <img src="gifs/rain.gif" width="100" alt="rain"> | <img src="videos/rain.gif" width="100" alt="rain video"> |
+| name | Spells a name in random colours | <img src="gifs/name.gif" width="100" alt="name"> | [Demo](demo/name.gif) |
+| rain | Falling green digital rain | <img src="gifs/rain.gif" width="100" alt="rain"> | [Demo](demo/rain.gif) |
 | stars | Twinkling stars | <img src="gifs/stars.gif" width="100" alt="stars"> | |
 
 ## Developers
