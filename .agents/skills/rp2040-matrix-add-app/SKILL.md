@@ -89,7 +89,7 @@ Generate the preview:
 .venv/bin/python tools/make_gif.py <name>
 ```
 
-The tool runs the app with stand-in libraries and writes `gifs/<name>.gif`.
+The tool runs the app with stand-in libraries and writes `preview/<name>.gif`.
 
 - If generation fails, inspect the error and fix the actual cause. It may be an app, preview-tool or
   environment issue.
@@ -102,7 +102,7 @@ The tool runs the app with stand-in libraries and writes `gifs/<name>.gif`.
 Open the GIF so the user can see it:
 
 ```bash
-open "gifs/<name>.gif"
+open "preview/<name>.gif"
 ```
 
 Do not substitute internal image inspection for opening the preview. Wait for the user to confirm
@@ -113,7 +113,7 @@ whether it matches what they pictured. Adjust until they are happy.
 Add one row to the table under `## Apps` in `README.md`, at the alphabetical position:
 
 ```markdown
-| traffic | Red, green and yellow lights in turn | ![traffic](gifs/traffic.gif) |
+| traffic | Red, green and yellow lights in turn | ![traffic](preview/traffic.gif) |
 ```
 
 The description is short, starts with a capital letter, has no full stop and uses "Touch to ..." for

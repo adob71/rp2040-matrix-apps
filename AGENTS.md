@@ -6,7 +6,7 @@ Little MicroPython apps for the Waveshare RP2040-Matrix, a board with a 5×5 RGB
 
 - `apps/` has one file per app. `launcher.py` is installed on the board as `main.py` and runs them one at a time.
 - `lib/` has the shared code: `ws2812.py` for the LEDs and `touch.py` for the touch pads.
-- `tools/make_gif.py` runs an app on the computer and records its preview GIF in `gifs/`.
+- `tools/make_gif.py` runs an app on the computer and records its preview GIF in `preview/`.
 - `docs/` has the board drawings, `firmware/` the MicroPython `.uf2` file, and `deploy.sh` copies everything to the board (`--firmware` or `--apps`).
 
 ## Skills

@@ -5,7 +5,7 @@ they are replaced by stand-ins with a fake clock that record every frame the
 app shows, so the app's own code decides what the GIF contains.
 
 Usage:
-    python3 tools/make_gif.py emoji          # apps/emoji.py -> gifs/emoji.gif
+    python3 tools/make_gif.py emoji          # apps/emoji.py -> preview/emoji.gif
     python3 tools/make_gif.py emoji dice     # several apps
     python3 tools/make_gif.py all            # every app listed in APPS below
 """

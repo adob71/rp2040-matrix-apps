@@ -35,18 +35,18 @@ Press BOOT to step through the apps in this order.
 
 | Name | Description | Preview | Demo |
 |---|---|---|---|
-| avatar | Little patterns like GitHub avatars | <img src="gifs/avatar.gif" width="100" alt="avatar"> | |
-| clock | Red hour hand and blue minute hand | <img src="gifs/clock.gif" width="100" alt="clock"> | |
-| count | Counts 0 to 9 | <img src="gifs/count.gif" width="100" alt="count"> | |
-| dice | Touch to roll, touch again to stop | <img src="gifs/dice.gif" width="100" alt="dice"> | |
-| emoji | Touch to change the face | <img src="gifs/emoji.gif" width="100" alt="emoji"> | |
-| eyes | A face that raises its eyebrows | <img src="gifs/eyes.gif" width="100" alt="eyes"> | |
-| flag | Touch to raise the red flag | <img src="gifs/flag.gif" width="100" alt="flag"> | |
-| heart | A beating heart | <img src="gifs/heart.gif" width="100" alt="heart"> | [heart](demo/heart.gif) |
-| life | Game of Life, a new random start each time | <img src="gifs/life.gif" width="100" alt="life"> | |
-| name | Spells a name in random colours | <img src="gifs/name.gif" width="100" alt="name"> | [name](demo/name.gif) |
-| rain | Falling green digital rain | <img src="gifs/rain.gif" width="100" alt="rain"> | [rain](demo/rain.gif) |
-| stars | Twinkling stars | <img src="gifs/stars.gif" width="100" alt="stars"> | |
+| avatar | Little patterns like GitHub avatars | <img src="preview/avatar.gif" width="100" alt="avatar"> | |
+| clock | Red hour hand and blue minute hand | <img src="preview/clock.gif" width="100" alt="clock"> | |
+| count | Counts 0 to 9 | <img src="preview/count.gif" width="100" alt="count"> | |
+| dice | Touch to roll, touch again to stop | <img src="preview/dice.gif" width="100" alt="dice"> | |
+| emoji | Touch to change the face | <img src="preview/emoji.gif" width="100" alt="emoji"> | |
+| eyes | A face that raises its eyebrows | <img src="preview/eyes.gif" width="100" alt="eyes"> | |
+| flag | Touch to raise the red flag | <img src="preview/flag.gif" width="100" alt="flag"> | |
+| heart | A beating heart | <img src="preview/heart.gif" width="100" alt="heart"> | [heart](demo/heart.gif) |
+| life | Game of Life, a new random start each time | <img src="preview/life.gif" width="100" alt="life"> | |
+| name | Spells a name in random colours | <img src="preview/name.gif" width="100" alt="name"> | [name](demo/name.gif) |
+| rain | Falling green digital rain | <img src="preview/rain.gif" width="100" alt="rain"> | [rain](demo/rain.gif) |
+| stars | Twinkling stars | <img src="preview/stars.gif" width="100" alt="stars"> | |
 
 ## Developers
 
