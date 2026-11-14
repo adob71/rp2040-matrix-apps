@@ -1,40 +1,23 @@
 from PIL import Image, ImageDraw, ImageFont
 import os
 
-# Configuration
 TEXT = "RP2040-Matrix Apps"
-FONT_PATH = "fonts/Everyday_Slight_5x5_Pixel_Font.ttf"  # Path to your downloaded font
-FONT_SIZE = 32                      # Adjust based on font scaling
+FONT_PATH = "fonts/everyday_slight_5x5_pixel_font.ttf"
+FONT_SIZE = 64
 OUTPUT_PATH = "fonts/header.png"
 
-# Load font
-try:
-    font = ImageFont.truetype(FONT_PATH, FONT_SIZE)
-except IOError:
-    print(f"Font not found at {FONT_PATH}")
-    exit(1)
+font = ImageFont.truetype(FONT_PATH, FONT_SIZE)
 
-# Calculate text size using modern Pillow bounding box method
-dummy_img = Image.new("RGBA", (1, 1))
-draw = ImageDraw.Draw(dummy_img)
-bbox = draw.textbbox((0, 0), TEXT, font=font)
-text_width = bbox[2] - bbox[0]
-text_height = bbox[3] - bbox[1]
+# Calculate dimensions with padding (x: 16, y: 12)
+dummy = Image.new("RGB", (1, 1))
+bbox = ImageDraw.Draw(dummy).textbbox((0, 0), TEXT, font=font)
+w = (bbox[2] - bbox[0]) + 32
+h = (bbox[3] - bbox[1]) + 24
 
-# Add padding
-padding_x = 16
-padding_y = 12
-img_width = text_width + (padding_x * 2)
-img_height = text_height + (padding_y * 2)
+# Create solid black image and draw white text
+img = Image.new("RGB", (w, h), (0, 0, 0))
+ImageDraw.Draw(img).text((16 - bbox[0], 12 - bbox[1]), TEXT, font=font, fill=(255, 255, 255))
 
-# Create transparent image (or match GitHub background: dark/light friendly or transparent)
-img = Image.new("RGBA", (img_width, img_height), (0, 0, 0, 0))
-draw = ImageDraw.Draw(img)
-
-# Draw text (adjust color as needed, e.g., white text for dark mode or specific hex)
-draw.text((padding_x - bbox[0], padding_y - bbox[1]), TEXT, font=font, fill=(255, 255, 255, 255))
-
-# Save output
 os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
-img.save(OUTPUT_PATH, "PNG")
+img.save(OUTPUT_PATH)
 print(f"Header generated successfully -> {OUTPUT_PATH}")
