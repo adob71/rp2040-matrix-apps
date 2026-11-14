@@ -1,5 +1,9 @@
 # RP2040-Matrix Apps
 
+<p align="left">
+  <img src="fonts/header.png" width="400">
+</p>
+
 **Little apps for a little 5×5 LED computer**
 
 Plug it into a USB port and it starts by itself.
