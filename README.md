@@ -42,10 +42,10 @@ Press BOOT to step through the apps in this order.
 | emoji | Touch to change the face | <img src="gifs/emoji.gif" width="100" alt="emoji"> | |
 | eyes | A face that raises its eyebrows | <img src="gifs/eyes.gif" width="100" alt="eyes"> | |
 | flag | Touch to raise the red flag | <img src="gifs/flag.gif" width="100" alt="flag"> | |
-| heart | A beating heart | <img src="gifs/heart.gif" width="100" alt="heart"> | [Demo](demo/heart.gif) |
+| heart | A beating heart | <img src="gifs/heart.gif" width="100" alt="heart"> | [heart](demo/heart.gif) |
 | life | Game of Life, a new random start each time | <img src="gifs/life.gif" width="100" alt="life"> | |
-| name | Spells a name in random colours | <img src="gifs/name.gif" width="100" alt="name"> | [Demo](demo/name.gif) |
-| rain | Falling green digital rain | <img src="gifs/rain.gif" width="100" alt="rain"> | [Demo](demo/rain.gif) |
+| name | Spells a name in random colours | <img src="gifs/name.gif" width="100" alt="name"> | [name](demo/name.gif) |
+| rain | Falling green digital rain | <img src="gifs/rain.gif" width="100" alt="rain"> | [rain](demo/rain.gif) |
 | stars | Twinkling stars | <img src="gifs/stars.gif" width="100" alt="stars"> | |
 
 ## Developers
