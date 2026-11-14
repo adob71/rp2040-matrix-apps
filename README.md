@@ -42,10 +42,10 @@ Press BOOT to step through the apps in this order.
 | emoji | Touch to change the face | <img src="gifs/emoji.gif" width="100" alt="emoji"> | |
 | eyes | A face that raises its eyebrows | <img src="gifs/eyes.gif" width="100" alt="eyes"> | |
 | flag | Touch to raise the red flag | <img src="gifs/flag.gif" width="100" alt="flag"> | |
-| heart | A beating heart | <img src="gifs/heart.gif" width="100" alt="heart"> | <video src="videos/heart.mp4" width="100" controls></video> |
+| heart | A beating heart | <img src="gifs/heart.gif" width="100" alt="heart"> | <img src="gifs/heart-video.gif" width="100" alt="heart video"> |
 | life | Game of Life, a new random start each time | <img src="gifs/life.gif" width="100" alt="life"> | |
-| name | Spells a name in random colours | <img src="gifs/name.gif" width="100" alt="name"> | <video src="videos/name.mp4" width="100" controls></video> |
-| rain | Falling green digital rain | <img src="gifs/rain.gif" width="100" alt="rain"> | <video src="videos/rain.mp4" width="100" controls></video> |
+| name | Spells a name in random colours | <img src="gifs/name.gif" width="100" alt="name"> | <img src="gifs/name-video.gif" width="100" alt="name video"> |
+| rain | Falling green digital rain | <img src="gifs/rain.gif" width="100" alt="rain"> | <img src="gifs/rain-video.gif" width="100" alt="rain video"> |
 | stars | Twinkling stars | <img src="gifs/stars.gif" width="100" alt="stars"> | |
 
 ## Developers
