@@ -1,5 +1,5 @@
 <p align="left">
-  <img src="fonts/banner.png" width="900">
+  <img src="docs/banner.png" width="900">
 </p>
 
 # RP2040-Matrix Apps
