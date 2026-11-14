@@ -4,7 +4,7 @@ import os
 TEXT = "RP2040-Matrix Apps"
 FONT_PATH = "fonts/everyday_slight_5x5_pixel_font.ttf"
 FONT_SIZE = 64
-OUTPUT_PATH = "fonts/header.png"
+OUTPUT_PATH = "docs/banner.png"
 
 font = ImageFont.truetype(FONT_PATH, FONT_SIZE)
 
@@ -20,4 +20,4 @@ ImageDraw.Draw(img).text((16 - bbox[0], 12 - bbox[1]), TEXT, font=font, fill=(25
 
 os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
 img.save(OUTPUT_PATH)
-print(f"Header generated successfully -> {OUTPUT_PATH}")
+print(f"Banner generated successfully -> {OUTPUT_PATH}")
