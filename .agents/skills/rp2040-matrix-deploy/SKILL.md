@@ -12,20 +12,22 @@ compatibility: macOS, mpremote and an RP2040-Matrix board connected over USB wit
 
 # Deploy to the RP2040-Matrix board
 
-The goal is to install the repository firmware if needed and deploy the launcher,
-the library and the apps to the board.
+The goal is to install the repository firmware if needed and deploy the launcher, the library and
+the apps to the board.
 
-Keep the deployment simple and follow the steps in order. Stop at the first failure
-unless a step says to continue. Run commands yourself and ask before flashing
-firmware or interrupting a running application.
+Keep the deployment simple and follow the steps in order. Stop at the first failure unless a step
+says to continue. Run commands yourself and ask before flashing firmware or interrupting a running
+application.
 
 This skill is for macOS only. Do not attempt Linux, Windows or WSL setup.
 
-If a command fails because your command sandbox blocks the network, USB access or files outside the repository, ask permission to run it outside the sandbox and repeat it.
+If a command fails because your command sandbox blocks the network, USB access or files outside the
+repository, ask permission to run it outside the sandbox and repeat it.
 
 ## 1. Check the basics
 
-Check that `deploy.sh`, `launcher.py`, `apps/` and `lib/` exist, and that `command -v mpremote` finds mpremote. If mpremote is missing, stop and send the user to `/rp2040-matrix-setup`.
+Check that `deploy.sh`, `launcher.py`, `apps/` and `lib/` exist, and that `command -v mpremote`
+finds mpremote. If mpremote is missing, stop and send the user to `/rp2040-matrix-setup`.
 
 ## 2. Find out what state the board is in
 
@@ -37,7 +39,8 @@ mpremote connect list
 mpremote exec "import sys; print(sys.version)"
 ```
 
-The `ls` fails whenever the board is not in firmware mode. That is normal and not an error. Then read the results:
+The `ls` fails whenever the board is not in firmware mode. That is normal and not an error. Then
+read the results:
 
 | Result | Meaning | Next |
 |---|---|---|
@@ -46,38 +49,64 @@ The `ls` fails whenever the board is not in firmware mode. That is normal and no
 | `connect list` shows a `usbmodem` device, but `mpremote exec` says "no device found" | Your command sandbox is blocking the serial port, so the board is fine | Ask for permission to run the command outside the sandbox and repeat it. Do not blame the cable |
 | No drive and no `usbmodem` device | The board is not connected, the cable carries no data, or the board runs other firmware without USB | Ask the user to reconnect it with a data cable, try another port and repeat the checks. If there is still nothing, ask them to hold BOOT while plugging in, then go to step 3 |
 
-If the user explicitly asks to reinstall or upgrade the firmware, go to step 3 even when MicroPython answers.
+If the user explicitly asks to reinstall or upgrade the firmware, go to step 3 even when MicroPython
+answers.
 
 ## 3. Install the firmware (rare)
 
-This is for a brand-new board, a board without MicroPython, or an upgrade the user asked for. Before flashing, explain that it replaces MicroPython and may erase files stored on the board. Files from this repository come back with step 4, but anything else on the board would be lost. Get an explicit yes first.
+This is for a brand-new board, a board without MicroPython, or an upgrade the user asked for. Before
+flashing, explain that it replaces MicroPython and may erase files stored on the board. Files from
+this repository come back with step 4, but anything else on the board would be lost. Get an explicit
+yes first.
 
-1. Ask the user to put the board in firmware mode: unplug the USB cable, hold the BOOT button, plug the cable in, then release BOOT. Wait for their confirmation, then check `ls /Volumes/RPI-RP2`. If the drive does not appear, try another cable or port, and make sure BOOT is held while plugging in.
-2. Run `./deploy.sh --firmware`. It copies the `.uf2` file from `firmware/` to the board, waits up to ten seconds for the board to restart and lists its files. macOS may show a "disk not ejected properly" notice, which can be ignored.
+1. Ask the user to put the board in firmware mode: unplug the USB cable, hold the BOOT button, plug
+   the cable in, then release BOOT. Wait for their confirmation, then check `ls /Volumes/RPI-RP2`.
+   If the drive does not appear, try another cable or port, and make sure BOOT is held while
+   plugging in.
+2. Run `./deploy.sh --firmware`. It copies the `.uf2` file from `firmware/` to the board, waits up
+   to ten seconds for the board to restart and lists its files. macOS may show a "disk not ejected
+   properly" notice, which can be ignored.
 
-If the output contains `Operation not permitted` or another copy error, the command sandbox may be blocking access to the firmware volume. Ask permission to run the command outside the sandbox and repeat it. Do not troubleshoot this as a board restart problem.
+If the output contains `Operation not permitted` or another copy error, the command sandbox may be
+blocking access to the firmware volume. Ask permission to run the command outside the sandbox and
+repeat it. Do not troubleshoot this as a board restart problem.
 
-3. If the script reports that the board did not come back and there was no firmware copy error, wait a few seconds and repeat the MicroPython check from step 2. If the board still does not respond, ask the user to unplug and reconnect it.
+3. If the script reports that the board did not come back and there was no firmware copy error, wait
+   a few seconds and repeat the MicroPython check from step 2. If the board still does not respond,
+   ask the user to unplug and reconnect it.
 4. Continue with step 4.
 
 ## 4. Deploy the apps
 
-Run `./deploy.sh --apps`. It copies `launcher.py` as `main.py`, then `lib/` and `apps/`, resets the saved app so the board starts on the first one, prints the file lists and restarts the board. The script prints every command it runs. Summarise the result and ignore the "File exists" lines from `mkdir`, which are harmless.
+Run `./deploy.sh --apps`. It copies `launcher.py` as `main.py`, then `lib/` and `apps/`, resets the
+saved app so the board starts on the first one, prints the file lists and restarts the board. The
+script prints every command it runs. Summarise the result and ignore the "File exists" lines from
+`mkdir`, which are harmless.
 
-Check the command exit status and output. The script exits with a non-zero status if a required deployment command fails. If deployment fails, check the USB connection and whether the command sandbox can access the serial port. Ask permission to retry outside the sandbox if necessary.
+Check the command exit status and output. The script exits with a non-zero status if a required
+deployment command fails. If deployment fails, check the USB connection and whether the command
+sandbox can access the serial port. Ask permission to retry outside the sandbox if necessary.
 
-Report success only after confirming that the launcher, `lib/` and the apps are present on the board.
+Report success only after confirming that the launcher, `lib/` and the apps are present on the
+board.
 
 ## 5. Verify
 
-- Compare the printed `:apps` and `:lib` file lists with the repository. Report missing files. Run `mpremote fs ls :apps` or `mpremote fs ls :lib` yourself only if the output was cut off or unclear.
-- The script copies files but never deletes them. A file on the board with no match in `apps/` or `lib/`, for example an app that was renamed or removed, is stale. List such files and offer to remove them with `mpremote fs rm :apps/<name>.py`. Ask before removing anything.
+- Compare the printed `:apps` and `:lib` file lists with the repository. Report missing files. Run
+  `mpremote fs ls :apps` or `mpremote fs ls :lib` yourself only if the output was cut off or
+  unclear.
+- The script copies files but never deletes them. A file on the board with no match in `apps/` or
+  `lib/`, for example an app that was renamed or removed, is stale. List such files and offer to
+  remove them with `mpremote fs rm :apps/<name>.py`. Ask before removing anything.
 - Check that every name in the `APPS` list in `launcher.py` has a file in `apps/`.
-- Ask the user to look at the board. The first app should be running, and BOOT should step to the next one.
+- Ask the user to look at the board. The first app should be running, and BOOT should step to the
+  next one.
 
 ## Jump to a specific app
 
-After a deploy the board starts on the first app. To go straight to another one, for example a newly added app, read the `APPS` list in `launcher.py`, count the app's position from 0 and run the following with that number in place of `7`:
+After a deploy the board starts on the first app. To go straight to another one, for example a newly
+added app, read the `APPS` list in `launcher.py`, count the app's position from 0 and run the
+following with that number in place of `7`:
 
 ```bash
 mpremote exec "open('app_index','w').write('7')"
@@ -88,8 +117,13 @@ The board then starts on that app until the next deploy.
 
 ## Rules
 
-- Never run `./deploy.sh --firmware` without an explicit yes from the user and without `/Volumes/RPI-RP2` present.
+- Never run `./deploy.sh --firmware` without an explicit yes from the user and without
+  `/Volumes/RPI-RP2` present.
 - Never delete files from the board without asking.
-- Do not run `mpremote repl`. It keeps the USB port busy and blocks later commands. If a command reports a busy port, ask the user to close other serial programs such as Thonny, a serial monitor or another mpremote session.
-- If the board shows nothing after a deploy, ask the user to press RESET. If it stays dark, suggest running `/rp2040-matrix-setup` again.
-- To upgrade MicroPython, replace the `.uf2` file in `firmware/` and update `FIRMWARE_FILE` at the top of `deploy.sh`.
+- Do not run `mpremote repl`. It keeps the USB port busy and blocks later commands. If a command
+  reports a busy port, ask the user to close other serial programs such as Thonny, a serial monitor
+  or another mpremote session.
+- If the board shows nothing after a deploy, ask the user to press RESET. If it stays dark, suggest
+  running `/rp2040-matrix-setup` again.
+- To upgrade MicroPython, replace the `.uf2` file in `firmware/` and update `FIRMWARE_FILE` at the
+  top of `deploy.sh`.
