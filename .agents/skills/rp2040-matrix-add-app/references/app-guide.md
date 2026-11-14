@@ -177,9 +177,9 @@ while True:
     time.sleep_ms(touch.POLL_MS)
 ```
 
-## Preview entry in `tools/make_gif.py`
+## Preview entry in `tools/make_preview.py`
 
-The `APPS` table at the top of `tools/make_gif.py` has one line per app:
+The `APPS` table at the top of `tools/make_preview.py` has one line per app:
 
 ```python
 "traffic": dict(ms=7000),

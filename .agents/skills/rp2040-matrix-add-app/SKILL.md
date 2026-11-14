@@ -3,7 +3,7 @@ name: rp2040-matrix-add-app
 description: >-
   Adds a new app to the RP2040-Matrix apps repository from the user's description.
   Writes apps/<name>.py with the ws2812 and touch libraries, registers it in
-  launcher.py in alphabetical order, adds it to tools/make_gif.py, tests it by
+  launcher.py in alphabetical order, adds it to tools/make_preview.py, tests it by
   running it on the computer, creates its preview GIF and adds its row to the
   README. Use whenever the user wants to add, create, write, make or build an app,
   animation, game or LED pattern for the board, or to change an existing app, for
@@ -57,7 +57,7 @@ something immediately and its main loop must sleep.
 
 - Add the name to the `APPS` list in `launcher.py`, keeping the list in alphabetical order. This
   list is also the order in which the BOOT button steps through the apps.
-- Add an entry to the `APPS` table in `tools/make_gif.py` with `ms` for one full cycle of the
+- Add an entry to the `APPS` table in `tools/make_preview.py` with `ms` for one full cycle of the
   animation, plus `taps` or `seed` when the app needs them. The guide explains how to choose.
 
 ## 5. Test it on the computer
@@ -86,7 +86,7 @@ fi
 Generate the preview:
 
 ```bash
-.venv/bin/python tools/make_gif.py <name>
+.venv/bin/python tools/make_preview.py <name>
 ```
 
 The tool runs the app with stand-in libraries and writes `preview/<name>.gif`.

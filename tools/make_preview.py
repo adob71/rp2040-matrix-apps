@@ -5,9 +5,9 @@ they are replaced by stand-ins with a fake clock that record every frame the
 app shows, so the app's own code decides what the GIF contains.
 
 Usage:
-    python3 tools/make_gif.py emoji          # apps/emoji.py -> preview/emoji.gif
-    python3 tools/make_gif.py emoji dice     # several apps
-    python3 tools/make_gif.py all            # every app listed in APPS below
+    python3 tools/make_preview.py emoji          # apps/emoji.py -> preview/emoji.gif
+    python3 tools/make_preview.py emoji dice     # several apps
+    python3 tools/make_preview.py all            # every app listed in APPS below
 """
 import random
 import runpy
@@ -199,7 +199,7 @@ def make_gif(name, cfg):
 def main():
     names = sys.argv[1:]
     if not names:
-        sys.exit("Usage: make_gif.py <app> [<app> ...] | all\nApps: " + " ".join(APPS))
+        sys.exit("Usage: make_preview.py <app> [<app> ...] | all\nApps: " + " ".join(APPS))
     if names == ["all"]:
         names = list(APPS)
     for n in names:
