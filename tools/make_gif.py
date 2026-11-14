@@ -27,6 +27,7 @@ ROOT = Path(__file__).resolve().parent.parent
 #         makes GIFs with many frames 10-20x bigger, so it is off for those apps
 APPS = {
     "avatar": dict(ms=10000),
+    "clock":  dict(ms=12000),
     "count":  dict(ms=1000),
     "dice":   dict(ms=4000, taps=[800, 2800]),
     "emoji":  dict(ms=3000, taps=[1000, 2000]),

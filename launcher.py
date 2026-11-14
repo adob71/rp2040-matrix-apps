@@ -6,7 +6,7 @@ import rp2
 # Apps live in /apps on the board. Names = file names without ".py".
 # Order = order of BOOTSEL presses.
 APPS_DIR = "/apps"
-APPS = ["avatar", "count", "dice", "emoji", "eyes", "flag", "heart", "life", "name", "rain", "stars"]
+APPS = ["avatar", "clock", "count", "dice", "emoji", "eyes", "flag", "heart", "life", "name", "rain", "stars"]
 STATE_FILE = "app_index"      # remembers which app was running
 
 def load_index():

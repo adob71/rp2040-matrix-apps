@@ -36,6 +36,7 @@ Press BOOT to step through the apps in this order.
 | Name | Description | Preview |
 |---|---|---|
 | avatar | Little patterns like GitHub avatars | ![avatar](gifs/avatar.gif) |
+| clock | Red hour hand and blue minute hand | ![clock](gifs/clock.gif) |
 | count | Counts 0 to 9 | ![count](gifs/count.gif) |
 | dice | Touch to roll, touch again to stop | ![dice](gifs/dice.gif) |
 | emoji | Touch to change the face | ![emoji](gifs/emoji.gif) |
