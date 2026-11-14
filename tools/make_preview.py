@@ -188,7 +188,7 @@ def make_gif(name, cfg):
 
     images = [render(f, cfg.get("glow", True)) for f, _ in steps]
     durations = [int(round(d / 10.0) * 10) for _, d in steps]
-    out = ROOT / "gifs" / (name + ".gif")
+    out = ROOT / "preview" / (name + ".gif")
     out.parent.mkdir(parents=True, exist_ok=True)
     images[0].save(out, save_all=True, append_images=images[1:],
                    duration=durations, loop=0)
