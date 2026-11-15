@@ -1,4 +1,4 @@
-<!-- ![RP2040-Matrix Apps](docs/banner.png) -->
+![RP2040-Matrix Apps](docs/banner.png)
 
 # RP2040-Matrix Apps
 
