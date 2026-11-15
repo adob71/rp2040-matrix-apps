@@ -39,18 +39,18 @@ Press BOOT to step through the apps in this order.
 
 | Name | Description | Preview | Demo |
 |---|---|---|---|
-| clock | Red hour hand and blue minute hand | <img src="preview/clock.gif" width="100"> | |
-| dice | Touch to roll, touch again to stop | <img src="preview/dice.gif" width="100"> | |
-| emoji | Touch to change the face | <img src="preview/emoji.gif" width="100"> | |
-| eyes | A face that raises its eyebrows | <img src="preview/eyes.gif" width="100"> | |
-| flag | Touch to raise the red flag | <img src="preview/flag.gif" width="100"> | |
-| heart | A beating heart | <img src="preview/heart.gif" width="100"> | [▶️](demo/heart.gif) |
-| identicon | Little patterns like GitHub identicons | <img src="preview/identicon.gif" width="100"> | |
-| life | Game of Life, a new random start each time | <img src="preview/life.gif" width="100"> | |
-| name | Spells a name in random colours | <img src="preview/name.gif" width="100"> | [▶️](demo/name.gif) |
-| number | Counts 0 to 9 | <img src="preview/number.gif" width="100"> | |
-| rain | Falling green digital rain | <img src="preview/rain.gif" width="100"> | [▶️](demo/rain.gif) |
-| stars | Twinkling stars | <img src="preview/stars.gif" width="100"> | |
+| clock | Analog clock with red hour and blue minute hands | <img src="preview/clock.gif" width="100"> | |
+| dice | Touch to roll the die, touch again to stop | <img src="preview/dice.gif" width="100"> | |
+| emoji | Touch to cycle through different emoji faces | <img src="preview/emoji.gif" width="100"> | |
+| eyes | Animated face that raises its eyebrows | <img src="preview/eyes.gif" width="100"> | |
+| flag | Touch to raise and lower the red flag | <img src="preview/flag.gif" width="100"> | |
+| heart | Continuous beating heart animation | <img src="preview/heart.gif" width="100"> | [▶️](demo/heart.gif) |
+| identicon | Symmetric pixel patterns like GitHub identicons | <img src="preview/identicon.gif" width="100"> | |
+| life | Conway's Game of Life with a fresh random start | <img src="preview/life.gif" width="100"> | |
+| name | Spells a custom name in randomized colors | <img src="preview/name.gif" width="100"> | [▶️](demo/name.gif) |
+| number | Loops counting from 0 to 9 | <img src="preview/number.gif" width="100"> | |
+| rain | Matrix-style falling green digital rain | <img src="preview/rain.gif" width="100"> | [▶️](demo/rain.gif) |
+| stars | Random twinkling night sky stars | <img src="preview/stars.gif" width="100"> | |
 
 ## Developers
 
