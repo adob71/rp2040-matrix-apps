@@ -2,13 +2,13 @@
 
 # RP2040-Matrix Apps
 
-**Little apps for a little 5×5 LED computer**
+Little apps for a little 5×5 LED computer
 
-Plug it into a USB port and it starts by itself.
+Plug it into a USB port and it starts automatically.
 
 This project runs on the [Waveshare RP2040-Matrix](https://www.waveshare.com/rp2040-matrix.htm), a development board built around the [Raspberry Pi RP2040](https://pip-assets.raspberrypi.com/categories/814-rp2040/documents/RP-008371-DS-1-rp2040-datasheet.pdf) microcontroller.
 
-## The board
+## Development Board
 
 | Front | Back |
 |:---:|:---:|
@@ -29,7 +29,7 @@ This project runs on the [Waveshare RP2040-Matrix](https://www.waveshare.com/rp2
 |---|---|
 | Touch pads (GP8–GP14) | Touch the pads inside the yellow outline to control apps that react to touch. |
 | BOOT button | Press to switch to the next app; after the last one it starts over. |
-| RESET button | Press to restart the board; it comes back on the same app. |
+| RESET button | Press to restart the board; it starts again on the same app. |
 
 ## Apps
 
@@ -54,7 +54,7 @@ Press BOOT to step through the apps in this order.
 
 This repo is built to be used with an AI coding agent that supports [Agent Skills](https://agentskills.io). The skills have been tested using GitHub Copilot CLI, OpenAI Codex CLI and Cursor Agent CLI.
 
-You also need macOS, an RP2040-Matrix board and a USB Type-C data cable.
+You also need a Mac, an RP2040-Matrix board and a USB Type-C data cable.
 
 ```bash
 git clone https://github.com/adob71/rp2040-matrix-apps.git && cd rp2040-matrix-apps
