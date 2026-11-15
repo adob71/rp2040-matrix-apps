@@ -26,13 +26,13 @@ ROOT = Path(__file__).resolve().parent.parent
 #   glow  False draws plain round LEDs without the soft glow; the glow looks nicer but
 #         makes GIFs with many frames 10-20x bigger, so it is off for those apps
 APPS = {
-    "avatar": dict(ms=10000),
     "clock":  dict(ms=12000),
     "dice":   dict(ms=4000, taps=[800, 2800]),
     "emoji":  dict(ms=3000, taps=[1000, 2000]),
     "eyes":   dict(ms=2140),
     "flag":   dict(ms=2000, taps=[1000]),
     "heart":  dict(ms=1100),
+    "identicon": dict(ms=10000),
     "life":   dict(ms=8000, seed=3),
     "name":   dict(ms=1840, seed=1),
     "number":  dict(ms=1000),

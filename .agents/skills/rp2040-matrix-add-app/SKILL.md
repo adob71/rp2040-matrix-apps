@@ -47,7 +47,7 @@ or `ws2812`, because the launcher imports apps by name. Tell the user which name
 
 ## 3. Write the app
 
-Read `references/app-guide.md`, then the existing app closest to the request: `apps/avatar.py` or
+Read `references/app-guide.md`, then the existing app closest to the request: `apps/identicon.py` or
 `apps/eyes.py` for fixed frames, `apps/emoji.py` for touch, `apps/dice.py` for touch with timing,
 `apps/stars.py` or `apps/life.py` for computed frames. Write `apps/<name>.py` in the same style,
 with settings in capitals at the top, short comments and no leftover debug output. The app must show
