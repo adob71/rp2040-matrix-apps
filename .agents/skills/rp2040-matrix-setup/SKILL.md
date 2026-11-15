@@ -6,39 +6,38 @@ description: >-
   finds the board over USB and verifies that MicroPython responds.
   Use when a user is new to the repository, asks to set up or get started,
   install mpremote, connect the board, or reports "board not found" or
-  mpremote errors. Run once per computer.
+  mpremote errors. Run once per computer, and again in each new clone for the preview environment.
 compatibility: macOS, Homebrew, Python 3 and an RP2040-Matrix board connected over USB.
 ---
 
 # Set up the RP2040-Matrix development environment
 
-The goal is a working macOS development environment ready for `/rp2040-matrix-deploy` and
-`/rp2040-matrix-add-app`.
+The goal is a working macOS development environment ready for the `rp2040-matrix-deploy` and
+`rp2040-matrix-add-app` skills.
 
-Keep the setup simple and follow the steps in order. Stop at the first failure unless a step says to
-continue. Run commands yourself and ask before installing software or interrupting a running
+Keep the setup simple and follow the steps in order. Stop at the first failure, except that a missing
+board (step 4) or unverified MicroPython (step 5) must not stop step 6, because the preview tooling
+needs no board. Run commands yourself and ask before installing software or interrupting a running
 application.
 
 This skill is for macOS only. Do not attempt Linux, Windows or WSL setup.
 
 If a command fails because your command sandbox blocks the network, USB access or files outside the
-repository, ask permission to run it outside the sandbox and repeat it.
+repository, ask permission to run it outside the sandbox and repeat it. Escalate only that one
+command.
+
+Placeholders in angle brackets, such as `<app-name>`, stand for real values. Write them without the
+angle brackets.
 
 ## 1. Check the repository
 
-Check that the current directory contains:
+Check that the current directory contains `launcher.py`, `deploy.sh`, `apps/`, `lib/`,
+`tools/make_preview.py` and `firmware/`.
 
-- `launcher.py`
-- `deploy.sh`
-- `apps/`
-- `lib/`
-
-If the repository is missing, ask the user before cloning:
-
-```bash
-git clone https://github.com/adob71/rp2040-matrix-apps.git
-cd rp2040-matrix-apps
-```
+If it does not, do not clone into the current directory. Ask the user where to put the repository,
+then ask before running `git clone https://github.com/adob71/rp2040-matrix-apps.git` there. Use that
+folder as the working directory for every later command; do not rely on `cd` persisting between
+commands.
 
 ## 2. Check Homebrew
 
@@ -65,12 +64,17 @@ mpremote --version 2>/dev/null || true
 
 Homebrew installs it in `$(brew --prefix)/bin`, which is `/opt/homebrew/bin` on Apple Silicon.
 
-- Homebrew does not have mpremote and no other copy exists: ask for permission, then run `brew
-  install mpremote`.
-- Another copy comes first in the `which -a` list, for example under `~/.local/bin` from pip or
-  pipx: explain the conflict and show both paths. Ask before changing anything. If the user agrees
-  to remove the other copy, use the tool that installed it, such as `pipx uninstall mpremote` or
-  `python3 -m pip uninstall mpremote`.
+- Homebrew does not have mpremote and no other copy exists: ask for permission, then run
+  `brew install mpremote`.
+- Homebrew does not have mpremote but another copy exists (for example under `~/.local/bin`): show
+  the path, explain that Homebrew manages mpremote in this project, ask before installing, then run
+  `brew install mpremote`. Check again which copy comes first.
+- Another copy comes first in the `which -a` list: show both paths and ask before changing anything.
+  If the user agrees to remove it, first work out what installed it from its path or from
+  `pipx list`. Use `pipx uninstall mpremote` for pipx. For pip, use the Python that owns that copy,
+  with `-y`: `/path/to/that/python -m pip uninstall -y mpremote`. Never uninstall from the
+  repository's `.venv`. If `$VIRTUAL_ENV` is set, tell the user that the virtual environment can
+  shadow the Homebrew copy.
 
 Verify:
 
@@ -89,7 +93,7 @@ Run:
 if [ -d /Volumes/RPI-RP2 ]; then
     echo "RP2040 BOOTSEL mass-storage mode detected"
 else
-    echo "RP2040 firmware volume not detected"
+    echo "RP2040 BOOTSEL volume not detected"
     mpremote connect list
 fi
 ```
@@ -97,20 +101,21 @@ fi
 `mpremote connect list` always shows two built-in macOS entries, `/dev/cu.Bluetooth-Incoming-Port`
 and `/dev/cu.debug-console`. Ignore them. Only a `usbmodem` device is the board.
 
-- `/Volumes/RPI-RP2` exists: the board is in firmware/BOOTSEL mode. Skip step 5 because nothing
-  answers over serial yet, continue with step 6, and report in step 7 that MicroPython is not
-  installed yet and that `/rp2040-matrix-deploy` installs it.
+- `/Volumes/RPI-RP2` exists: the board is in BOOTSEL mode. Skip step 5 because nothing answers over
+  serial. Continue with step 6 and report in step 7 that MicroPython was not checked, because a
+  board in BOOTSEL mode cannot be queried. The `rp2040-matrix-deploy` skill installs MicroPython if
+  needed.
 - A `usbmodem` device is listed: this is the board. Continue with step 5.
 - No `usbmodem` device and no `RPI-RP2` drive: check that the board is connected, that the USB cable
   carries data, and try another port, then run the command again. If there is still nothing, ask the
-  user to hold BOOT while plugging the board in, which puts it in firmware mode.
+  user to hold BOOT while plugging the board in, which puts it in BOOTSEL mode, then run the command again.
 - More than one `usbmodem` device: ask which one is the board, and ask the user to unplug the
   others.
 
 ## 5. Verify MicroPython
 
 Before running `mpremote exec`, explain that it may soft-reset the board and interrupt the running
-application. Ask permission every time before running it.
+application. Ask once, before the first `mpremote exec` of this session, and do not ask again for the same check.
 
 Use the actual USB serial port identified in step 4. Do not assume a fixed port name.
 
@@ -143,7 +148,7 @@ Check whether the repository-local virtual environment exists and Pillow is avai
 
 ```bash
 if [ -x .venv/bin/python ]; then
-    .venv/bin/python -c "import PIL; print(PIL.__version__)"
+    .venv/bin/python -c "import PIL; from PIL import Image, ImageChops, ImageDraw, ImageFilter; print(PIL.__version__)"
 else
     echo "Preview environment not ready"
 fi
@@ -163,7 +168,7 @@ fi
 Verify:
 
 ```bash
-.venv/bin/python -c "import PIL; print(PIL.__version__)"
+.venv/bin/python -c "import PIL; from PIL import Image, ImageChops, ImageDraw, ImageFilter; print(PIL.__version__)"
 ```
 
 Do not install Pillow globally or use Homebrew for this dependency.
@@ -175,11 +180,11 @@ Give a short summary of the actual results:
 - Repository: ready or missing
 - Homebrew: available or missing
 - mpremote: installed, show version and executable path
-- Board: detected (show the USB port), in firmware mode, or not detected
-- MicroPython: verified with version, not installed yet, not verified, or unavailable
+- Board: detected (show the USB port), in BOOTSEL mode, or not detected
+- MicroPython: verified with version, not checked (BOOTSEL mode), not verified, or unavailable
 - Preview tooling: ready or not installed
 
 Next steps:
 
-1. `/rp2040-matrix-deploy` — install firmware if needed and deploy the apps.
-2. `/rp2040-matrix-add-app <description>` — create a new application.
+1. The `rp2040-matrix-deploy` skill — install firmware if needed and deploy the apps.
+2. The `rp2040-matrix-add-app` skill, with a description of the app — create a new application.

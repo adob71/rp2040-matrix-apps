@@ -5,7 +5,7 @@ library calls and four patterns to start from.
 
 ## How an app runs
 
-The launcher (`launcher.py`, installed on the board as `main.py`) imports `apps/<name>.py`. The
+The launcher (`launcher.py`, installed on the board as `main.py`) imports `apps/<app-name>.py`. The
 top-level code of that file is the app, and it must loop forever. Pressing BOOT restarts the board
 on the next app in the `APPS` list, so every app starts from a clean state.
 
@@ -35,8 +35,11 @@ every pass.
    feel laggy.
 7. Colours are `(R, G, B)` with 0 to 255 per channel. The library applies a low brightness by
    default, so full-strength colours such as `(255, 0, 0)` are right.
-8. Name the file in lowercase as a valid Python name, and never as `time`, `math`, `random`, `touch`
-   or `ws2812`, or the name of another app. The launcher imports apps by name.
+8. Name the file in lowercase, using letters, digits and underscores, starting with a letter. It
+   must not be the name of another file in `apps/`, a library (`time`, `math`, `random`, `touch`,
+   `ws2812`), a MicroPython module (`machine`, `rp2`, `sys`, `os`, `gc`, `array`, `struct`,
+   `micropython`) or `main`, `launcher`, `boot`. The launcher imports apps by name, so a clash loads
+   the wrong module.
 
 ## `ws2812` library
 
@@ -51,7 +54,8 @@ every pass.
 `level` is the brightness from 0.0 to 1.0. The default is 0.05, and existing apps use levels up to
 about 0.12. Two things follow:
 
-- Leave `level` out for normal colours. The default is already bright.
+- Leave `level` out for normal colours. The default of 0.05 is deliberately low, so full-strength
+  colours such as `(255, 0, 0)` look right.
 - A dim colour with small numbers, such as `(10, 10, 10)`, goes completely dark at the default
   level, because every channel is multiplied by 0.05 and rounded down. Any channel below 20 is lost
   that way. Pass `level=1.0` for such colours, as `apps/number.py` and `apps/eyes.py` do.
@@ -160,7 +164,9 @@ import touch
 COLOR = (0, 200, 255)
 STEP_MS = 150                        # time between frames while running
 
-ws2812.show(ws2812.BLANK)
+IDLE = (".....", ".....", "..#..", ".....", ".....")   # frame shown while stopped
+
+ws2812.show(ws2812.build_frame(IDLE, COLOR))   # show something before the touch calibration
 pad = touch.Touch()
 running = False
 last = time.ticks_ms()
