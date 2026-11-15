@@ -28,7 +28,6 @@ ROOT = Path(__file__).resolve().parent.parent
 APPS = {
     "avatar": dict(ms=10000),
     "clock":  dict(ms=12000),
-    "count":  dict(ms=1000),
     "dice":   dict(ms=4000, taps=[800, 2800]),
     "emoji":  dict(ms=3000, taps=[1000, 2000]),
     "eyes":   dict(ms=2140),
@@ -36,6 +35,7 @@ APPS = {
     "heart":  dict(ms=1100),
     "life":   dict(ms=8000, seed=3),
     "name":   dict(ms=1840, seed=1),
+    "number":  dict(ms=1000),
     "rain": dict(ms=6000, seed=1),
     "stars":   dict(ms=6000, seed=1),
 }

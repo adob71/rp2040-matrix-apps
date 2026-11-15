@@ -41,7 +41,6 @@ Press BOOT to step through the apps in this order.
 |---|---|---|---|
 | avatar | Little patterns like GitHub avatars | <img src="preview/avatar.gif" width="100"> | |
 | clock | Red hour hand and blue minute hand | <img src="preview/clock.gif" width="100"> | |
-| count | Counts 0 to 9 | <img src="preview/count.gif" width="100"> | |
 | dice | Touch to roll, touch again to stop | <img src="preview/dice.gif" width="100"> | |
 | emoji | Touch to change the face | <img src="preview/emoji.gif" width="100"> | |
 | eyes | A face that raises its eyebrows | <img src="preview/eyes.gif" width="100"> | |
@@ -49,6 +48,7 @@ Press BOOT to step through the apps in this order.
 | heart | A beating heart | <img src="preview/heart.gif" width="100"> | [▶️](demo/heart.gif) |
 | life | Game of Life, a new random start each time | <img src="preview/life.gif" width="100"> | |
 | name | Spells a name in random colours | <img src="preview/name.gif" width="100"> | [▶️](demo/name.gif) |
+| number | Counts 0 to 9 | <img src="preview/number.gif" width="100"> | |
 | rain | Falling green digital rain | <img src="preview/rain.gif" width="100"> | [▶️](demo/rain.gif) |
 | stars | Twinkling stars | <img src="preview/stars.gif" width="100"> | |
 

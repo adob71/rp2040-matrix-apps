@@ -54,7 +54,7 @@ about 0.12. Two things follow:
 - Leave `level` out for normal colours. The default is already bright.
 - A dim colour with small numbers, such as `(10, 10, 10)`, goes completely dark at the default
   level, because every channel is multiplied by 0.05 and rounded down. Any channel below 20 is lost
-  that way. Pass `level=1.0` for such colours, as `apps/count.py` and `apps/eyes.py` do.
+  that way. Pass `level=1.0` for such colours, as `apps/number.py` and `apps/eyes.py` do.
 
 To light single pixels, start from a dark frame:
 
