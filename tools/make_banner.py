@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw, ImageFont
 import os
 
 TEXT = "RP2040-Matrix Apps"
-FONT_PATH = "fonts/Everyday_Slight_5x5_Pixel_Font.ttf"
+FONT_PATH = "fonts/Micro_Chat_5x5_Pixel_Font.ttf"
 FONT_SIZE = 64
 OUTPUT_PATH = "docs/banner.png"
 
