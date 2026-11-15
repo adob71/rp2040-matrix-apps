@@ -1,6 +1,4 @@
-<p align="left">
-  <img src="docs/banner.png" width="900">
-</p>
+![RP2040-Matrix Apps](docs/banner.png)
 
 # RP2040-Matrix Apps
 
