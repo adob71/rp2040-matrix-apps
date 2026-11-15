@@ -1,8 +1,15 @@
+"""
+Usage:
+    python3 tools/make_banner.py
+
+Generates docs/banner.png from the 5x5 pixel font.
+"""
+
 from PIL import Image, ImageDraw, ImageFont
 import os
 
 TEXT = "RP2040-Matrix Apps"
-FONT_PATH = "fonts/everyday_slight_5x5_pixel_font.ttf"
+FONT_PATH = "fonts/Everyday_Slight_5x5_Pixel_Font.ttf"
 FONT_SIZE = 64
 OUTPUT_PATH = "docs/banner.png"
 
