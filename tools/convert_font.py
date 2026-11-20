@@ -15,7 +15,7 @@ CHARACTERS = (
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     "abcdefghijklmnopqrstuvwxyz"
     "0123456789"
-    " !\"#$%&'()*+,-./:;<=>?[]\\^_`{|}~@"
+    " !#$%()*+-./:<=>?[]_|~@"
 )
 
 font = ImageFont.truetype(str(FONT), SIZE)
