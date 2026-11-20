@@ -1,8 +1,4 @@
-"""Generated Micro Chat 5x5 font data. Do not edit manually."""
-
-FONT_NAME = 'Micro Chat'
-FONT_AUTHOR = 'VEXED'
-FONT_LICENSE = 'CC BY 4.0'
+"""Generated font data. Do not edit manually."""
 
 GLYPHS = {
     'A': ('.###.', '#...#', '#####', '#...#', '#...#'),

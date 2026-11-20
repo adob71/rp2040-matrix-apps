@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parent.parent
 
 FONT = ROOT / "fonts/Micro_Chat_Monospaced_5x5.ttf"
-OUTPUT = ROOT / "lib/micro_chat_monospaced_5x5.py"
+OUTPUT = ROOT / "lib/font.py"
 
 SIZE = 5
 
@@ -51,10 +51,7 @@ for char in CHARACTERS:
 OUTPUT.parent.mkdir(parents=True, exist_ok=True)
 
 with OUTPUT.open("w") as f:
-    f.write('"""Generated Micro Chat 5x5 font data. Do not edit manually."""\n\n')
-    f.write("FONT_NAME = 'Micro Chat'\n")
-    f.write("FONT_AUTHOR = 'VEXED'\n")
-    f.write("FONT_LICENSE = 'CC BY 4.0'\n\n")
+    f.write('"""Generated font data. Do not edit manually."""\n\n')
     f.write("GLYPHS = {\n")
 
     for char, bitmap in glyphs.items():
@@ -62,4 +59,4 @@ with OUTPUT.open("w") as f:
 
     f.write("}\n")
 
-print(f"Generated {len(glyphs)} glyphs (5x5): {OUTPUT}")
+print(f"Generated {len(glyphs)} glyphs : {OUTPUT}")
