@@ -1,88 +1,54 @@
 import time
 import random
 import ws2812
+import text
 
-TEXT = "MATRIX"   # any length: A-Z, 0-9, space and ! ( ) , - . : ; ? from FONT below
+TEXT = "RP2040-Matrix Apps"
 
-DELAY_MS = 200       # time per character
-GAP_MS = 40          # dark pause between characters, so repeated ones are visible
-END_MS = 400         # dark pause after the whole text, before it repeats
+BRIGHTNESS = 0.05
 
-# 3x5 uppercase font, read from the attached image
-FONT = {
-    " ": ("...", "...", "...", "...", "..."),
-    "A": (".#.", "#.#", "###", "#.#", "#.#"),
-    "B": ("##.", "#.#", "##.", "#.#", "##."),
-    "C": (".##", "#..", "#..", "#..", ".##"),
-    "D": ("##.", "#.#", "#.#", "#.#", "##."),
-    "E": ("###", "#..", "##.", "#..", "###"),
-    "F": ("###", "#..", "##.", "#..", "#.."),
-    "G": (".##", "#..", "#.#", "#.#", ".##"),
-    "H": ("#.#", "#.#", "###", "#.#", "#.#"),
-    "I": ("###", ".#.", ".#.", ".#.", "###"),
-    "J": ("..#", "..#", "..#", "#.#", ".#."),
-    "K": ("#.#", "#.#", "##.", "#.#", "#.#"),
-    "L": ("#..", "#..", "#..", "#..", "###"),
-    "M": ("#.#", "###", "###", "#.#", "#.#"),
-    "N": ("###", "#.#", "#.#", "#.#", "#.#"),
-    "O": (".#.", "#.#", "#.#", "#.#", ".#."),
-    "P": ("###", "#.#", "###", "#..", "#.."),
-    "Q": (".##", "#.#", "#.#", "##.", ".##"),
-    "R": ("###", "#.#", "##.", "#.#", "#.#"),
-    "S": (".##", "#..", "###", "..#", "##."),
-    "T": ("###", ".#.", ".#.", ".#.", ".#."),
-    "U": ("#.#", "#.#", "#.#", "#.#", "###"),
-    "V": ("#.#", "#.#", "#.#", ".#.", ".#."),
-    "W": ("#.#", "#.#", "###", "###", "#.#"),
-    "X": ("#.#", "#.#", ".#.", "#.#", "#.#"),
-    "Y": ("#.#", "#.#", ".#.", ".#.", ".#."),
-    "Z": ("###", "..#", ".#.", "#..", "###"),
-    "0": ("###", "#.#", "#.#", "#.#", "###"),
-    "1": ("##.", ".#.", ".#.", ".#.", "###"),
-    "2": ("###", "..#", "###", "#..", "###"),
-    "3": ("###", "..#", ".##", "..#", "###"),
-    "4": ("#.#", "#.#", "###", "..#", "..#"),
-    "5": ("###", "#..", "###", "..#", "###"),
-    "6": ("###", "#..", "###", "#.#", "###"),
-    "7": ("###", "..#", "..#", "..#", "..#"),
-    "8": ("###", "#.#", "###", "#.#", "###"),
-    "9": ("###", "#.#", "###", "..#", "###"),
-    "!": (".#.", ".#.", ".#.", "...", ".#."),
-    "(": (".#.", "#..", "#..", "#..", ".#."),
-    ")": (".#.", "..#", "..#", "..#", ".#."),
-    ",": ("...", "...", "...", ".#.", "#.."),
-    "-": ("...", "...", ".##", "...", "..."),
-    ".": ("...", "...", "...", "...", ".#."),
-    ":": ("...", ".#.", "...", ".#.", "..."),
-    ";": ("...", ".#.", "...", ".#.", "#.."),
-    "?": ("###", "..#", ".##", "...", ".#."),
-}
+DELAY_MS = 200
+GAP_MS = 40
+END_MS = 400
+
 
 def hue_to_rgb(h):
-    # h in 0.0 - 1.0 around the colour wheel, full saturation and brightness
+    """Convert hue (0.0–1.0) to RGB."""
     i = int(h * 6)
     f = h * 6 - i
     rising = int(255 * f)
     falling = int(255 * (1 - f))
-    return [(255, rising, 0), (falling, 255, 0), (0, 255, rising),
-            (0, falling, 255), (rising, 0, 255), (255, 0, falling)][i % 6]
+
+    return [
+        (255, rising, 0),
+        (falling, 255, 0),
+        (0, 255, rising),
+        (0, falling, 255),
+        (rising, 0, 255),
+        (255, 0, falling),
+    ][i % 6]
+
 
 hue = random.random()
 
-def next_color():
-    global hue
-    hue = (hue + random.uniform(0.2, 0.8)) % 1.0   # always a clearly different colour
-    return hue_to_rgb(hue)
 
-def glyph_frame(ch, color):
-    rows = FONT.get(ch.upper(), FONT[" "])            # unknown characters show blank
-    wide = ["." + row + "." for row in rows]          # center the 3-wide glyph in the 5-wide matrix
-    return ws2812.build_frame(wide, color)
+def next_color():
+    """Return a random colour at reduced brightness."""
+    global hue
+    hue = (hue + random.uniform(0.2, 0.8)) % 1.0
+
+    return tuple(
+        int(channel * BRIGHTNESS)
+        for channel in hue_to_rgb(hue)
+    )
+
 
 while True:
     for ch in TEXT:
-        ws2812.show(glyph_frame(ch, next_color()))
+        ws2812.show(text.build_frame(ch, next_color()))
         time.sleep_ms(DELAY_MS)
+
         ws2812.show(ws2812.BLANK)
         time.sleep_ms(GAP_MS)
+
     time.sleep_ms(END_MS)

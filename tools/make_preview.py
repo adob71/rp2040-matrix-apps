@@ -19,6 +19,8 @@ from PIL import Image, ImageChops, ImageDraw, ImageFilter
 
 ROOT = Path(__file__).resolve().parent.parent
 
+sys.path.insert(0, str(ROOT / "lib"))
+
 # What to record for each app:
 #   ms    how many milliseconds of app time to record (one loop of the animation)
 #   taps  times (ms) at which a touch pad is "tapped", for apps that use touch
@@ -34,7 +36,7 @@ APPS = {
     "heart":  dict(ms=1100),
     "identicon": dict(ms=10000),
     "life":   dict(ms=8000, seed=3),
-    "name":   dict(ms=1840, seed=1),
+    "name":   dict(ms=4500, seed=1),
     "number":  dict(ms=1000),
     "rain": dict(ms=6000, seed=1),
     "stars":   dict(ms=6000, seed=1),
