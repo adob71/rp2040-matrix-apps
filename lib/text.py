@@ -1,9 +1,9 @@
 """5x5 text rendering using the Micro Chat bitmap font."""
 
-import micro_chat_5x5
+import micro_chat_monospaced_5x5
 import ws2812
 
-FONT = micro_chat_5x5.GLYPHS
+FONT = micro_chat_monospaced_5x5.GLYPHS
 
 BLANK = (
     ".....",
