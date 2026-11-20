@@ -38,9 +38,9 @@ for char in CHARACTERS:
         # Fit glyph proportionally inside the 5x5 cell.
         image.thumbnail((SIZE, SIZE), Image.Resampling.NEAREST)
 
-        # Centre the glyph.
+        # Centre horizontally and align to the bottom baseline.
         x = (SIZE - image.width) // 2
-        y = (SIZE - image.height) // 2
+        y = SIZE - image.height
         cell.paste(image, (x, y))
 
     glyphs[char] = tuple(
