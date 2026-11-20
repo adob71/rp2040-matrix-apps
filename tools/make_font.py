@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent.parent
 
-FONT = ROOT / "fonts/Micro_Chat_Monospaced_5x5.ttf"
+FONT = ROOT / "fonts/micro_chat_monospaced_5x5.ttf"
 OUTPUT = ROOT / "lib/font.py"
 
 SIZE = 5

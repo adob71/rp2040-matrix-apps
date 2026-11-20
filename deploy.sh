@@ -1,6 +1,6 @@
 #!/bin/sh
 
-FIRMWARE_FILE="firmware/RPI_PICO-20250911-v1.26.1.uf2"
+FIRMWARE_FILE="firmware/rpi_pico_20250911_v1_26_1.uf2"
 BOOT_VOLUME="/Volumes/RPI-RP2"
 
 usage() {
