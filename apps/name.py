@@ -3,7 +3,7 @@ import random
 import ws2812
 import text
 
-TEXT = "RP2040-Matrix Apps"
+TEXT = "MATRIX"
 
 BRIGHTNESS = 0.05
 

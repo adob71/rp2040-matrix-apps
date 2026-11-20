@@ -36,7 +36,7 @@ APPS = {
     "heart":  dict(ms=1100),
     "identicon": dict(ms=10000),
     "life":   dict(ms=8000, seed=3),
-    "name":   dict(ms=4500, seed=1),
+    "name":   dict(ms=1840, seed=1),
     "number":  dict(ms=1000),
     "rain": dict(ms=6000, seed=1),
     "stars":   dict(ms=6000, seed=1),
