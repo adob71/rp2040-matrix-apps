@@ -49,6 +49,7 @@ Press BOOT to step through the apps in this order.
 | number | Loops counting from 0 to 9 | <img src="preview/number.gif" width="100"> | |
 | rain | Matrix-style falling green digital rain | <img src="preview/rain.gif" width="100"> | [▶️](demo/rain.gif) |
 | stars | Random twinkling night sky stars | <img src="preview/stars.gif" width="100"> | |
+| tictactoe | Two computers play Tic-Tac-Toe | <img src="preview/tictactoe.gif" width="100"> | |
 
 ## Developers
 

@@ -38,6 +38,7 @@ APPS = {
     "number":  dict(ms=1000),
     "rain": dict(ms=6000, seed=1),
     "stars":   dict(ms=6000, seed=1),
+    "tictactoe": dict(ms=5400, seed=2),
 }
 
 BASE_LEVEL = 0.05   # the board's default brightness, shown as full colour in the GIF
