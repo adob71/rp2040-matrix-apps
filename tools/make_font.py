@@ -1,62 +1,34 @@
 #!/usr/bin/env python3
-"""Convert Micro Chat TTF glyphs into 5x5 MicroPython bitmap data."""
+"""Convert a 3x5 pixel TTF into 5x5 MicroPython bitmap glyphs (lib/font.py).
+
+Usage: python3 tools/make_font.py   (edit FONT below to pick blocked/notched/rounded)
+"""
 
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent.parent
-
-FONT = ROOT / "fonts/micro_chat_monospaced_5x5.ttf"
+FONT = ROOT / "fonts/mono_regular_3x5_blocked.ttf"  # or _notched.ttf / _rounded.ttf
 OUTPUT = ROOT / "lib/font.py"
-
-SIZE = 5
-
-CHARACTERS = (
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    "abcdefghijklmnopqrstuvwxyz"
-    "0123456789"
+CHARS = (
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
     " !#$%()*+-./:<=>?[]_|~@"
 )
 
-font = ImageFont.truetype(str(FONT), SIZE)
-glyphs = {}
+# Em size where "H" is exactly 5 px tall (the font's native pixel size).
+size = next(s for s in range(4, 33)
+            if ImageFont.truetype(str(FONT), s).getbbox("H", anchor="ls")[1] == -5)
+font = ImageFont.truetype(str(FONT), size)
 
-for char in CHARACTERS:
-    bbox = font.getbbox(char)
+lines = []
+for c in CHARS:
+    img = Image.new("1", (5, 5))
+    # Baseline at row 5, x=1 -> a 3-wide glyph lands in columns 1..3.
+    ImageDraw.Draw(img).text((1, 5), c, font=font, fill=1, anchor="ls")
+    rows = tuple("".join("#" if img.getpixel((x, y)) else "." for x in range(5)) for y in range(5))
+    lines.append(f"    {c!r}: {rows!r},")
 
-    image = Image.new("1", (max(1, bbox[2] - bbox[0]), max(1, bbox[3] - bbox[1])))
-    ImageDraw.Draw(image).text((-bbox[0], -bbox[1]), char, font=font, fill=1)
-
-    # Remove empty borders.
-    bounds = image.getbbox()
-
-    cell = Image.new("1", (SIZE, SIZE))
-
-    if bounds:
-        image = image.crop(bounds)
-
-        # Fit glyph proportionally inside the 5x5 cell.
-        image.thumbnail((SIZE, SIZE), Image.Resampling.NEAREST)
-
-        # Centre horizontally and align to the bottom baseline.
-        x = (SIZE - image.width) // 2
-        y = SIZE - image.height
-        cell.paste(image, (x, y))
-
-    glyphs[char] = tuple(
-        "".join("#" if cell.getpixel((x, y)) else "." for x in range(SIZE))
-        for y in range(SIZE)
-    )
-
-OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-
-with OUTPUT.open("w") as f:
-    f.write('"""Generated font data. Do not edit manually."""\n\n')
-    f.write("GLYPHS = {\n")
-
-    for char, bitmap in glyphs.items():
-        f.write(f"    {char!r}: {bitmap!r},\n")
-
-    f.write("}\n")
-
-print(f"Generated {len(glyphs)} glyphs : {OUTPUT}")
+OUTPUT.write_text(
+    '"""Generated font data. Do not edit manually."""\n\nGLYPHS = {\n' + "\n".join(lines) + "\n}\n"
+)
+print(f"Generated {len(CHARS)} glyphs (em size {size}) : {OUTPUT}")
