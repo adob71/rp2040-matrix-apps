@@ -5,10 +5,11 @@ Little MicroPython apps for the Waveshare RP2040-Matrix, a board with a 5×5 RGB
 ## Repository map
 
 - `apps/` has one file per app. `launcher.py` is installed on the board as `main.py` and runs them one at a time.
-- `lib/` has the shared code: `ws2812.py` for the LEDs and `touch.py` for the touch pads.
-- `tools/make_preview.py` runs an app on the computer and records its preview GIF in `preview/`.
-- `docs/` has the board drawings, `firmware/` the MicroPython `.uf2` file, and `deploy.sh` copies everything to the board (`--firmware` or `--apps`).
-- `preview/` has the app preview GIFs, `demo/` the demo GIFs, `fonts/` the pixel font used by the tools, and `tools/` the preview, demo and banner scripts.
+- `lib/` has the shared code: `ws2812.py` for the LEDs, `touch.py` for the touch pads, `text.py` for drawing text and `font.py` for the glyph data. `font.py` is generated, so never edit it by hand.
+- `fonts/` has the 3x5 pixel fonts (blocked, notched, rounded). `tools/make_font.py` converts one of them into `lib/font.py`: set `FONT` in the script, then run `python tools/make_font.py`.
+- `tools/` also has `make_preview.py`, which runs an app on the computer and records its GIF in `preview/`, plus `make_demo.sh` and `make_banner.py`.
+- `preview/` has the app preview GIFs, `demo/` the demo GIFs and `docs/` the board drawings and banner.
+- `firmware/` has the MicroPython `.uf2` file, and `deploy.sh` copies everything to the board (`--firmware` or `--apps`).
 
 ## Skills
 
@@ -24,4 +25,5 @@ Use the skills in `.agents/skills/` for these tasks instead of improvising:
 - The `APPS` list in `launcher.py` and the table in `README.md` stay in alphabetical order.
 - Ask before running `./deploy.sh --firmware` or deleting files on the board. Never leave `mpremote repl` open.
 - Do not commit unless asked. Use Conventional Commits with one short, specific line, such as `feat(skills): add rp2040-matrix-deploy skill`.
-- The README is for users and is written in British English ("colours"). Keep it short.
+- After changing the font or a font-dependent tool, regenerate `lib/font.py` and the affected previews.
+- The README is for users and is written in American English ("colors"). Keep it short.
