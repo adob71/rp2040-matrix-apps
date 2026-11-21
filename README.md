@@ -4,7 +4,7 @@
 
 Little apps for a little 5×5 LED computer
 
-Plug it into a USB port and it starts automatically.
+Plug it in and it runs.
 
 This project runs on the [Waveshare RP2040-Matrix](https://www.waveshare.com/rp2040-matrix.htm), a development board built around the [Raspberry Pi RP2040](https://pip-assets.raspberrypi.com/categories/814-rp2040/documents/RP-008371-DS-1-rp2040-datasheet.pdf) microcontroller.
 
