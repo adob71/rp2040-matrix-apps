@@ -8,7 +8,7 @@ Little MicroPython apps for the Waveshare RP2040-Matrix, a board with a 5×5 RGB
 - `lib/` has the shared code: `ws2812.py` for the LEDs, `touch.py` for the touch pads, `text.py` for drawing text and `font.py` for the glyph data. `font.py` is generated, so never edit it by hand.
 - `fonts/` has the 3x5 pixel fonts (blocked, notched, rounded). `tools/make_font.py` converts one of them into `lib/font.py`: set `FONT` in the script, then run `python tools/make_font.py`.
 - `tools/` also has `make_preview.py`, which runs an app on the computer and records its GIF in `preview/`, plus `make_demo.sh` and `make_banner.py`.
-- `preview/` has the app preview GIFs, `demo/` the demo GIFs and `docs/` the board drawings and banner.
+- `preview/` has the app preview GIFs, `demo/` the demo GIFs and `docs/` the board drawings, banner, RP2040 datasheet and board schematic (PDF).
 - `firmware/` has the MicroPython `.uf2` file, and `deploy.sh` copies everything to the board (`--firmware` or `--apps`).
 
 ## Skills

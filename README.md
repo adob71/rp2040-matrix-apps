@@ -73,3 +73,5 @@ No AI coding agent? The skills in `.agents/skills/` are plain step-by-step instr
 MIT. See [LICENSE](LICENSE).
 
 Waveshare and Raspberry Pi are trademarks of their respective owners. This is an independent project, not affiliated with or endorsed by either company.
+
+The RP2040 datasheet in `docs/` is © Raspberry Pi Ltd, licensed under CC BY-ND 4.0. The board schematic is from [Waveshare](https://files.waveshare.com/upload/4/49/RP2040-Matrix.pdf).
