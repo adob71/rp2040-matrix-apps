@@ -46,10 +46,7 @@ Press BOOT to step through the apps in this order.
 | identicon | Symmetric pixel patterns, like GitHub identicons | <img src="preview/identicon.gif" width="100"> | |
 | life | Conway's Game of Life from a random start | <img src="preview/life.gif" width="100"> | |
 | name | Spells a custom name in random colors | <img src="preview/name.gif" width="100"> | [▶️](demo/name.gif) |
-| number | Counts from 0 to 9 on a loop | <img src="preview/number.gif" width="100"> | |
 | rain | Falling green digital rain, Matrix-style | <img src="preview/rain.gif" width="100"> | [▶️](demo/rain.gif) |
-| stars | Twinkling stars in a random night sky | <img src="preview/stars.gif" width="100"> | |
-| tictactoe | Two computer players compete at Tic-Tac-Toe | <img src="preview/tictactoe.gif" width="100"> | |
 
 ## Developers
 

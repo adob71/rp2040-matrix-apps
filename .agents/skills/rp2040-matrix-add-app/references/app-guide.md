@@ -34,7 +34,7 @@ every pass.
    timers for anything slower, as `apps/dice.py` does. A long sleep between frames makes touches
    feel laggy.
 7. Colours are `(R, G, B)` with 0 to 255 per channel. The library applies a low brightness by
-   default, so full-strength colours such as `(255, 0, 0)` are right.
+   default, so full-strength colors such as `(255, 0, 0)` are right.
 8. Name the file in lowercase, using letters, digits and underscores, starting with a letter. It
    must not be the name of another file in `apps/`, a library (`time`, `math`, `random`, `touch`,
    `ws2812`), a MicroPython module (`machine`, `rp2`, `sys`, `os`, `gc`, `array`, `struct`,
@@ -45,7 +45,7 @@ every pass.
 
 | Call | What it does |
 |---|---|
-| `ws2812.build_frame(rows, color, level=None)` | Turns 5 strings of 5 characters (`#` lit, `.` off) into a frame in one colour. |
+| `ws2812.build_frame(rows, color, level=None)` | Turns 5 strings of 5 characters (`#` lit, `.` off) into a frame in one color. |
 | `ws2812.pack(r, g, b, level=None)` | One pixel value, for frames built pixel by pixel. |
 | `ws2812.show(frame)` | Sends a frame to the LEDs. A frame is a list of 25 pixel values. |
 | `ws2812.OFF` | The value of a dark pixel. |
@@ -54,11 +54,11 @@ every pass.
 `level` is the brightness from 0.0 to 1.0. The default is 0.05, and existing apps use levels up to
 about 0.12. Two things follow:
 
-- Leave `level` out for normal colours. The default of 0.05 is deliberately low, so full-strength
-  colours such as `(255, 0, 0)` look right.
-- A dim colour with small numbers, such as `(10, 10, 10)`, goes completely dark at the default
+- Leave `level` out for normal colors. The default of 0.05 is deliberately low, so full-strength
+  colors such as `(255, 0, 0)` look right.
+- A dim color with small numbers, such as `(10, 10, 10)`, goes completely dark at the default
   level, because every channel is multiplied by 0.05 and rounded down. Any channel below 20 is lost
-  that way. Pass `level=1.0` for such colours, as `apps/number.py` and `apps/eyes.py` do.
+  that way. Pass `level=1.0` for such colors, as `apps/eyes.py` does.
 
 To light single pixels, start from a dark frame:
 
@@ -190,7 +190,7 @@ The `APPS` table at the top of `tools/make_preview.py` has one line per app:
 ```python
 "traffic": dict(ms=7000),
 "emoji":   dict(ms=3000, taps=[1000, 2000]),
-"stars":   dict(ms=6000, seed=1),
+"life":    dict(ms=8000, seed=3),
 ```
 
 - `ms` is how many milliseconds of the app to record. For a loop, use the time of one full cycle:
@@ -202,7 +202,7 @@ The `APPS` table at the top of `tools/make_preview.py` has one line per app:
 - `glow=False` draws plain round LEDs and keeps the GIF small. Use it only for long, busy
   animations, because the glow is what makes the preview look like the real board.
 
-The preview runs on a fake clock without the touch calibration, so it is fast and shows the colours
+The preview runs on a fake clock without the touch calibration, so it is fast and shows the colors
 at full strength.
 
 ## Descriptions that work well

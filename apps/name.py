@@ -33,7 +33,7 @@ hue = random.random()
 
 
 def next_color():
-    """Return a random colour at reduced brightness."""
+    """Return a random color at reduced brightness."""
     global hue
     hue = (hue + random.uniform(0.2, 0.8)) % 1.0
 

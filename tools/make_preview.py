@@ -37,13 +37,10 @@ APPS = {
     "identicon": dict(ms=10000),
     "life":   dict(ms=8000, seed=3),
     "name":   dict(ms=1840, seed=1),
-    "number":  dict(ms=1000),
     "rain": dict(ms=6000, seed=1),
-    "stars":   dict(ms=6000, seed=1),
-    "tictactoe": dict(ms=5400, seed=2),
 }
 
-BASE_LEVEL = 0.05   # the board's default brightness, shown as full colour in the GIF
+BASE_LEVEL = 0.05   # the board's default brightness, shown as full color in the GIF
 MIN_MS = 40         # frames closer together than this are merged (keeps GIFs small)
 
 CELL = 48           # pixels per LED position
@@ -90,8 +87,8 @@ def make_modules(rec):
     w.BLANK = [w.OFF] * 25
 
     def pack(r, g, b, level=None):
-        # Real board: colour * level. Here the default level shows as the full
-        # colour; dimmer or brighter levels scale from there, keeping the hue.
+        # Real board: color * level. Here the default level shows as the full
+        # color; dimmer or brighter levels scale from there, keeping the hue.
         level = w.BRIGHTNESS if level is None else level
         k = level / BASE_LEVEL
         top = max(r, g, b) * k

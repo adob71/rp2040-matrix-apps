@@ -34,10 +34,10 @@ angle brackets.
 ## 1. Understand the request
 
 The description can be one line ("a traffic light") or a detailed spec. Work out what the app shows,
-its colours, its timing and whether it reacts to touch. Ask only when an answer would change the app
+its colors, its timing and whether it reacts to touch. Ask only when an answer would change the app
 and cannot be assumed sensibly, with at most two questions in one message. Otherwise choose sensible
 defaults, say what you assumed in a line or two and carry on. Don't ask about things that are easy
-to change later, such as exact colours or speed.
+to change later, such as exact colors or speed.
 
 If the user wants to change an existing app, skip steps 2 and 4, edit `apps/<app-name>.py` in
 place and redo step 5. Redo step 6 only if the app's description changed.
@@ -46,14 +46,14 @@ place and redo step 5. Redo step 6 only if the app's description changed.
 
 Pick one short lowercase name made of letters, digits and underscores that starts with a letter,
 such as `traffic`. Name what you see on the board: singular when one thing is shown at a time
-(`heart`), plural when several are (`stars`). The name must follow rule 8 of the app guide. Run
+(`heart`), plural when several are (`eyes`). The name must follow rule 8 of the app guide. Run
 `ls apps/` first. Tell the user which name you chose.
 
 ## 3. Write the app
 
 Read `references/app-guide.md`, then the existing app closest to the request: `apps/identicon.py` or
 `apps/eyes.py` for fixed frames, `apps/emoji.py` for touch, `apps/dice.py` for touch with timing,
-`apps/stars.py` or `apps/life.py` for computed frames. Write `apps/<app-name>.py` in the same style,
+`apps/rain.py` or `apps/life.py` for computed frames. Write `apps/<app-name>.py` in the same style,
 with settings in capitals at the top, short comments and no leftover debug output. The app must show
 something immediately and its main loop must sleep.
 
