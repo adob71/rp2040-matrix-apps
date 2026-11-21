@@ -23,7 +23,7 @@ every pass.
 
 ## Rules
 
-1. Import only `time`, `ws2812`, `touch`, `random` and `math`.
+1. Import only `time`, `ws2812`, `touch`, `text`, `random` and `math`.
 2. Sleep on every pass of the main loop. A loop that never sleeps cannot be interrupted by BOOT.
 3. Never read the BOOT button in an app. The launcher does that.
 4. Show something right away, before slow setup such as touch calibration, so the board is never

@@ -2,7 +2,7 @@
 Usage:
     python3 tools/make_banner.py
 
-Generates docs/banner.png from the 5x5 pixel font.
+Generates docs/banner.png from the 3x5 pixel font.
 """
 
 from PIL import Image, ImageDraw, ImageFont
@@ -10,7 +10,7 @@ import os
 
 TEXT = "RP2040-Matrix Apps"
 FONT_PATH = "fonts/mono_regular_3x5_blocked.ttf"
-FONT_SIZE = 64
+FONT_SIZE = 60
 OUTPUT_PATH = "docs/banner.png"
 
 font = ImageFont.truetype(FONT_PATH, FONT_SIZE)

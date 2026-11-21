@@ -21,7 +21,7 @@ Use the skills in `.agents/skills/` for these tasks instead of improvising:
 
 ## Rules
 
-- Apps import only `time`, `ws2812`, `touch`, `random` and `math`, and sleep on every pass of their main loop. They never read the BOOT button or use `machine` or `rp2`.
+- Apps import only `time`, `ws2812`, `touch`, `text`, `random` and `math`, and sleep on every pass of their main loop. They never read the BOOT button or use `machine` or `rp2`.
 - The `APPS` list in `launcher.py` and the table in `README.md` stay in alphabetical order.
 - Ask before running `./deploy.sh --firmware` or deleting files on the board. Never leave `mpremote repl` open.
 - Do not commit unless asked. Use Conventional Commits with one short, specific line, such as `feat(skills): add rp2040-matrix-deploy skill`.
