@@ -6,7 +6,7 @@ Little apps for a little 5×5 LED computer
 
 Plug it in and it runs.
 
-This project runs on the [Waveshare RP2040-Matrix](https://www.waveshare.com/rp2040-matrix.htm), a development board built around the [Raspberry Pi RP2040](https://pip-assets.raspberrypi.com/categories/814-rp2040/documents/RP-008371-DS-1-rp2040-datasheet.pdf) microcontroller.
+This project runs on the [Waveshare RP2040-Matrix](https://www.waveshare.com/rp2040-matrix.htm), a development board built around the [Raspberry Pi RP2040](https://www.raspberrypi.com/products/rp2040/) microcontroller.
 
 ## Development Board
 
@@ -74,4 +74,4 @@ MIT. See [LICENSE](LICENSE).
 
 Waveshare and Raspberry Pi are trademarks of their respective owners. This is an independent project, not affiliated with or endorsed by either company.
 
-The [RP2040 datasheet](docs/rp2040-datasheet.pdf) is © Raspberry Pi Ltd, licensed under CC BY-ND 4.0. The [board schematic](docs/rp2040-matrix-schematic.pdf) is from [Waveshare](https://files.waveshare.com/upload/4/49/RP2040-Matrix.pdf).
+The [RP2040 datasheet](docs/rp2040-datasheet.pdf) is © Raspberry Pi Ltd, licensed under [CC BY-ND 4.0](https://creativecommons.org/licenses/by-nd/4.0/) and included unmodified. The [RP2040-Matrix schematic](docs/rp2040-matrix-schematic.pdf) is published by Waveshare.
