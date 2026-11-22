@@ -1,6 +1,6 @@
 # RP2040-Matrix Apps
 
-Little apps for a little 5×5 LED matrix computer
+Little apps for a little LED matrix computer
 
 Plug it in and it runs.
 
@@ -15,7 +15,7 @@ This project runs on the [Waveshare RP2040-Matrix](https://www.waveshare.com/rp2
 | # | Description |
 |---|---|
 | 1 | USB Type-C connector |
-| 2 | 5×5 RGB LED Matrix |
+| 2 | 5×5 LED matrix |
 | 3 | Touch pads (GP8–GP14) |
 | 4 | BOOT button |
 | 5 | RESET button |

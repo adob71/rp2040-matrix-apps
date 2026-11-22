@@ -26,6 +26,6 @@ def centered(y, text, size, fill):
 
 
 centered(220, "RP2040-Matrix Apps", 96, "white")
-centered(380, "Little apps for a little 5x5 LED matrix computer", 36, (150, 150, 150))
+centered(380, "Little apps for a little LED matrix computer", 30, (150, 150, 150))
 img.save(OUTPUT_PATH)
 print(f"Saved {OUTPUT_PATH}")
