@@ -1,8 +1,6 @@
-<!-- ![RP2040-Matrix Apps](docs/banner.png) -->
-
 # RP2040-Matrix Apps
 
-Little apps for a little 5×5 LED computer
+Little apps for a little 5×5 LED matrix computer
 
 Plug it in and it runs.
 
