@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Generate docs/social-preview.png (1280x640) for the GitHub social preview.
+"""Generate docs/banner.png (1280x640) for the GitHub social preview.
 
-Usage: python3 tools/make_social_preview.py
+Usage: python3 tools/make_banner.py
 """
 
 from PIL import Image, ImageDraw, ImageFont
 
 FONT_PATH = "fonts/mono_regular_3x5_blocked.ttf"
-OUTPUT_PATH = "docs/social-preview.png"
+OUTPUT_PATH = "docs/banner.png"
 W, H = 1280, 640
 
 img = Image.new("RGB", (W, H), "black")
