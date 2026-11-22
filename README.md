@@ -15,7 +15,7 @@ This project runs on the [Waveshare RP2040-Matrix](https://www.waveshare.com/rp2
 | # | Description |
 |---|---|
 | 1 | USB Type-C connector |
-| 2 | 5×5 LED matrix |
+| 2 | 5×5 RGB LED matrix |
 | 3 | Touch pads (GP8–GP14) |
 | 4 | BOOT button |
 | 5 | RESET button |
