@@ -2,11 +2,12 @@
 name: rp2040-matrix-deploy
 description: >-
   Deploys the RP2040-Matrix apps to the board on macOS. Installs MicroPython
-  firmware on a brand-new board (rare, needs BOOT held while plugging in) and
-  copies the launcher, library and apps with deploy.sh. Use when the user wants
-  to deploy, upload, flash, install firmware, update the board or see a new or
-  changed app on the board, and after adding or editing an app. Needs the setup
-  from rp2040-matrix-setup to be done first.
+  firmware on a brand-new board (every new Waveshare board needs it once; hold
+  BOOT while plugging in) and copies the launcher, library and apps with
+  deploy.sh. Use when the user wants to deploy, upload, flash, install
+  firmware, update the board or see a new or changed app on the board, and
+  after adding or editing an app. Needs the setup from rp2040-matrix-setup to
+  be done first.
 compatibility: macOS, mpremote and an RP2040-Matrix board connected over USB with a data cable.
 ---
 
@@ -44,34 +45,37 @@ Run these checks:
 mpremote connect list
 ```
 
-Run `mpremote exec "import sys; print(sys.version)"` only when no BOOTSEL volume is present and
-`connect list` shows exactly one `usbmodem` device. If it shows more than one, ask which is the
-board and use `mpremote connect <port> exec ...` instead. This check may soft-reset the board and
-stop the running app. Deploying already replaces that app, so it needs no extra permission.
+Run `mpremote exec "import sys; print(sys.version)" 2>&1 | tail -n 15` only when no BOOTSEL volume
+is present and `connect list` shows exactly one `usbmodem` device. If it shows more than one, ask
+which is the board and use `mpremote connect <port> exec ...` instead. This check may soft-reset the
+board and stop the running app. Deploying already replaces that app, so it needs no extra
+permission. The `tail` keeps the output short, because a board running the factory test floods it.
 
 Then read the results:
 
 | Result | Meaning | Next |
 |---|---|---|
-| `/Volumes/RPI-RP2` exists | The board is in BOOTSEL mode. It may be new, or a working board that was put in BOOTSEL mode | Ask the user: flash MicroPython now (go to step 3), or unplug and reconnect without BOOT to check whether MicroPython is already installed (repeat step 2) |
+| `/Volumes/RPI-RP2` exists | The board is in BOOTSEL mode. It may be new, or a working board that was put in BOOTSEL mode | Ask the user: flash MicroPython now (go to step 3), or unplug and reconnect without BOOT to check whether MicroPython is already installed (repeat step 2). If this session already showed that the board blocks the REPL, skip the reconnect option and go straight to step 3 |
 | A MicroPython version is printed | The board is ready | Go to step 4 |
 | `connect list` shows a `usbmodem` device, but `mpremote exec` says "no device found" | Your command sandbox is blocking the serial port, so the board is fine | Ask for permission to run the command outside the sandbox and repeat it. Do not blame the cable |
+| `connect list` shows a `usbmodem` device, but `mpremote exec` fails with "could not enter raw repl", and the output is a repeating stream such as "GPIO test" and "ADC test" lines | The board runs a program that never lets the REPL in. On a new board this is the Waveshare factory test, which is normal. RESET only restarts it | Do not retry, and do not suggest RESET, reconnecting or closing serial programs. Tell the user the board is new and needs MicroPython installed, then go to step 3 |
 | No drive and no `usbmodem` device | The board is not connected, the cable carries no data, or the board runs other firmware without USB | Ask the user to reconnect it with a data cable, try another port and repeat the checks. If there is still nothing, ask them to hold BOOT while plugging in, then go to step 3 |
 
 If the user explicitly asks to reinstall or upgrade the firmware, go to step 3 even when MicroPython
 answers.
 
-## 3. Install the firmware (rare)
+## 3. Install the firmware (every new board, and recovery)
 
 This is for a brand-new board, a board without MicroPython, or an upgrade the user asked for. Before
 flashing, explain that it replaces MicroPython and may erase files stored on the board. Files from
-this repository come back with step 4, but anything else on the board would be lost. Get an explicit
-yes first.
+this repository come back with step 4, but anything else on the board would be lost. If the board
+showed the factory test, say that flashing replaces only the factory program and there is nothing
+else on the board to lose. Get an explicit yes first.
 
 a) Ask the user to put the board in BOOTSEL mode: unplug the USB cable, hold the BOOT button, plug
-   the cable in, then release BOOT. Wait for their confirmation, then check `ls /Volumes/RPI-RP2`.
-   If the drive does not appear, try another cable or port, and make sure BOOT is held while
-   plugging in.
+   the cable in, then release BOOT. If the board is already plugged in, holding BOOT and pressing
+   RESET also works. Wait for their confirmation, then check `ls /Volumes/RPI-RP2`. If the drive
+   does not appear, try another cable or port, and make sure BOOT is held while plugging in.
 b) Run `./deploy.sh --firmware`. It copies the `.uf2` file from `firmware/` to the board, waits up
    to ten seconds for the board to restart and lists its files. macOS may show a "disk not ejected
    properly" notice, which can be ignored.
@@ -82,7 +86,8 @@ repeat it. Do not troubleshoot this as a board restart problem.
 
 c) If the script reports that the board did not come back and there was no firmware copy error, wait
    a few seconds and repeat the MicroPython check from step 2. If the board still does not respond,
-   ask the user to unplug and reconnect it.
+   ask the user to unplug and reconnect it. If the same "could not enter raw repl" failure or the
+   factory output is still there after flashing, stop and report it. Do not loop.
 d) Continue with the next top-level step, 4. Deploy the apps.
 
 ## 4. Deploy the apps
@@ -133,6 +138,8 @@ The board then starts on that app until the next deploy.
 - Never run `./deploy.sh --firmware` without an explicit yes from the user and without
   `/Volumes/RPI-RP2` present.
 - Never delete files from the board without asking.
+- Never answer "could not enter raw repl" with RESET, a reconnect or closing serial programs. Those
+  fix a busy port, not a program that blocks the REPL.
 - Do not run `mpremote repl`. It keeps the USB port busy and blocks later commands. If a command
   reports a busy port, ask the user to close other serial programs such as Thonny, a serial monitor
   or another mpremote session.

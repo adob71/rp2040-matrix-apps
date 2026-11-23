@@ -122,8 +122,11 @@ Use the actual USB serial port identified in step 4. Do not assume a fixed port 
 For example, if the detected port is `/dev/cu.usbmodem101`:
 
 ```bash
-mpremote connect /dev/cu.usbmodem101 exec "import sys; print(sys.version)"
+mpremote connect /dev/cu.usbmodem101 exec "import sys; print(sys.version)" 2>&1 | tail -n 15
 ```
+
+The `tail` keeps the output short, because a board that runs a program printing nonstop (see below)
+would flood it.
 
 The output must identify MicroPython and show its version.
 
@@ -135,7 +138,13 @@ sandbox is probably blocking the serial port, because the board was just listed:
 3. If `lsof` returns no process, ask the user to retry the version check directly in Terminal.
 4. If a process is identified, ask the user to close the corresponding application before retrying.
 
-If the board stops responding during the check, ask the user to press RESET and retry once.
+If the command fails with "could not enter raw repl", do not ask the user to press RESET. A board
+straight from Waveshare runs a factory test (repeating "GPIO test" and "ADC test" lines) that blocks
+the REPL, and RESET only restarts it. Report MicroPython as not verified (REPL blocked, probably the
+factory test), tell the user to put the board in BOOTSEL mode by holding BOOT while plugging it in,
+and continue with step 6. The `rp2040-matrix-deploy` skill then installs MicroPython.
+
+For any other stall, ask the user to press RESET and retry once.
 
 Do not report MicroPython as verified unless the version check succeeds.
 
@@ -180,11 +189,15 @@ Give a short summary of the actual results:
 - Repository: ready or missing
 - Homebrew: available or missing
 - mpremote: installed, show version and executable path
-- Board: detected (show the USB port), in BOOTSEL mode, or not detected
-- MicroPython: verified with version, not checked (BOOTSEL mode), not verified, or unavailable
+- Board: detected (show the USB port), in BOOTSEL mode, not detected, or detected but blocking the
+  REPL (probably the factory test)
+- MicroPython: verified with version, not checked (BOOTSEL mode), not verified (REPL blocked),
+  not verified (other reason), or unavailable
 - Preview tooling: ready or not installed
 
 Next steps:
 
 1. The `rp2040-matrix-deploy` skill — install firmware if needed and deploy the apps.
 2. The `rp2040-matrix-add-app` skill, with a description of the app — create a new application.
+3. If the board blocks the REPL, hold BOOT while plugging it in, then use the
+   `rp2040-matrix-deploy` skill. It installs MicroPython.
