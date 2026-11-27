@@ -35,7 +35,7 @@ Press BOOT to step through the apps in this order.
 
 | Name | Description | Preview | Demo |
 |---|---|---|---|
-| clock | Analog clock with red hour and blue minute hands | <img src="preview/clock.gif" width="100"> | |
+| clock | Analog clock with red hour and blue minute hands | <img src="preview/clock.gif" width="100"> | [▶️](demo/clock.gif) |
 | dice | Touch to roll a die, touch again to stop | <img src="preview/dice.gif" width="100"> | |
 | emoji | Touch to cycle through emoji faces | <img src="preview/emoji.gif" width="100"> | |
 | eyes | Animated eyes that raise their eyebrows | <img src="preview/eyes.gif" width="100"> | |
