@@ -122,7 +122,7 @@ Use the actual USB serial port identified in step 4. Do not assume a fixed port 
 For example, if the detected port is `/dev/cu.usbmodem101`:
 
 ```bash
-mpremote connect /dev/cu.usbmodem101 exec "import sys; print(sys.version)" 2>&1 | tail -n 15
+mpremote connect /dev/cu.usbmodem101 exec "import sys; print(sys.version)" 2>&1 | tail -c 3000
 ```
 
 The `tail` keeps the output short, because a board that runs a program printing nonstop (see below)

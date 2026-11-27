@@ -45,7 +45,7 @@ Run these checks:
 mpremote connect list
 ```
 
-Run `mpremote exec "import sys; print(sys.version)" 2>&1 | tail -n 15` only when no BOOTSEL volume
+Run `mpremote exec "import sys; print(sys.version)" 2>&1 | tail -c 3000` only when no BOOTSEL volume
 is present and `connect list` shows exactly one `usbmodem` device. If it shows more than one, ask
 which is the board and use `mpremote connect <port> exec ...` instead. This check may soft-reset the
 board and stop the running app. Deploying already replaces that app, so it needs no extra
@@ -58,7 +58,7 @@ Then read the results:
 | `/Volumes/RPI-RP2` exists | The board is in BOOTSEL mode. It may be new, or a working board that was put in BOOTSEL mode | Ask the user: flash MicroPython now (go to step 3), or unplug and reconnect without BOOT to check whether MicroPython is already installed (repeat step 2). If this session already showed that the board blocks the REPL, skip the reconnect option and go straight to step 3 |
 | A MicroPython version is printed | The board is ready | Go to step 4 |
 | `connect list` shows a `usbmodem` device, but `mpremote exec` says "no device found" | Your command sandbox is blocking the serial port, so the board is fine | Ask for permission to run the command outside the sandbox and repeat it. Do not blame the cable |
-| `connect list` shows a `usbmodem` device, but `mpremote exec` fails with "could not enter raw repl", and the output is a repeating stream such as "GPIO test" and "ADC test" lines | The board runs a program that never lets the REPL in. On a new board this is the Waveshare factory test, which is normal. RESET only restarts it | Do not retry, and do not suggest RESET, reconnecting or closing serial programs. Tell the user the board is new and needs MicroPython installed, then go to step 3 |
+| `connect list` shows a `usbmodem` device, but `mpremote exec` fails with "could not enter raw repl" (the output may also show repeating "GPIO test" and "ADC test" lines) | The board runs a program that never lets the REPL in. On a new board this is the Waveshare factory test, which is normal. RESET only restarts it | Do not retry, and do not suggest RESET, reconnecting or closing serial programs. Tell the user the board is new and needs MicroPython installed, then go to step 3 |
 | No drive and no `usbmodem` device | The board is not connected, the cable carries no data, or the board runs other firmware without USB | Ask the user to reconnect it with a data cable, try another port and repeat the checks. If there is still nothing, ask them to hold BOOT while plugging in, then go to step 3 |
 
 If the user explicitly asks to reinstall or upgrade the firmware, go to step 3 even when MicroPython
@@ -73,8 +73,7 @@ showed the factory test, say that flashing replaces only the factory program and
 else on the board to lose. Get an explicit yes first.
 
 a) Ask the user to put the board in BOOTSEL mode: unplug the USB cable, hold the BOOT button, plug
-   the cable in, then release BOOT. If the board is already plugged in, holding BOOT and pressing
-   RESET also works. Wait for their confirmation, then check `ls /Volumes/RPI-RP2`. If the drive
+   the cable in, then release BOOT. Wait for their confirmation, then check `ls /Volumes/RPI-RP2`. If the drive
    does not appear, try another cable or port, and make sure BOOT is held while plugging in.
 b) Run `./deploy.sh --firmware`. It copies the `.uf2` file from `firmware/` to the board, waits up
    to ten seconds for the board to restart and lists its files. macOS may show a "disk not ejected
