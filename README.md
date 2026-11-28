@@ -35,14 +35,14 @@ Press BOOT to step through the apps in this order.
 
 | Name | Description | Preview | Demo |
 |---|---|---|---|
-| clock | Analog clock with red hour and blue minute hands | <img src="preview/clock.gif" width="100"> | [▶️](demo/clock.gif) |
+| clock | Analog clock with hour and minute hands | <img src="preview/clock.gif" width="100"> | [▶️](demo/clock.gif) |
 | dice | Touch to roll a die, touch again to stop | <img src="preview/dice.gif" width="100"> | |
 | emoji | Touch to cycle through emoji faces | <img src="preview/emoji.gif" width="100"> | |
 | eyes | Animated eyes that raise their eyebrows | <img src="preview/eyes.gif" width="100"> | |
 | flag | Touch to raise and lower the red flag | <img src="preview/flag.gif" width="100"> | |
 | heart | Beating heart animation | <img src="preview/heart.gif" width="100"> | [▶️](demo/heart.gif) |
-| identicon | Symmetric pixel patterns, like GitHub identicons | <img src="preview/identicon.gif" width="100"> | |
-| life | Conway's Game of Life from a random start | <img src="preview/life.gif" width="100"> | |
+| identicon | Touch to cycle through identicons | <img src="preview/identicon.gif" width="100"> | |
+| life | Game of Life from a random start | <img src="preview/life.gif" width="100"> | |
 | name | Spells a custom name in random colors | <img src="preview/name.gif" width="100"> | [▶️](demo/name.gif) |
 | rain | Falling green digital rain, Matrix-style | <img src="preview/rain.gif" width="100"> | [▶️](demo/rain.gif) |
 

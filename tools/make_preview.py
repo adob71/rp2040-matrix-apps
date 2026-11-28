@@ -34,7 +34,7 @@ APPS = {
     "eyes":   dict(ms=2140),
     "flag":   dict(ms=2000, taps=[1000]),
     "heart":  dict(ms=1100),
-    "identicon": dict(ms=10000),
+    "identicon": dict(ms=5000, taps=[1000, 2000, 3000, 4000]),
     "life":   dict(ms=8000, seed=3),
     "name":   dict(ms=1840, seed=1),
     "rain": dict(ms=6000, seed=1),
