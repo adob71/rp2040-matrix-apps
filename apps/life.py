@@ -8,15 +8,10 @@ STEP_MS = 300        # time per generation
 FILL = 0.4           # chance that a cell is alive in a new random start
 MIN_ALIVE = 4        # skip boring starts with fewer live cells than this
 HISTORY = 12         # generations remembered to spot repeating patterns
-MIN_STEPS = 12       # a repeating pattern runs at least this many generations before restart
-MAX_STEPS = 60       # restart after this many generations (gliders take a long time to repeat)
-END_MS = 1500        # pause on the final pattern before restarting
+STIR = 3             # live cells added when the pattern settles
+MAX_GENS = 150       # reseed after this many generations (about 45 s at 300 ms)
 
-SURVIVOR = (0, 0, 255)       # (R, G, B) cell that was alive last generation too
-NEWBORN = (255, 255, 255)    # (R, G, B) cell born this generation
-
-PX_SURVIVOR = ws2812.pack(SURVIVOR[0], SURVIVOR[1], SURVIVOR[2])
-PX_NEWBORN = ws2812.pack(NEWBORN[0], NEWBORN[1], NEWBORN[2])
+ALIVE = ws2812.pack(0, 0, 255)
 
 def random_board():
     while True:
@@ -38,33 +33,31 @@ def step(board):
             new[r * SIZE + c] = 1 if n == 3 or (alive and n == 2) else 0
     return new
 
-def draw(board, prev):
-    frame = []
-    for i in range(CELLS):
-        if board[i]:
-            frame.append(PX_SURVIVOR if prev[i] else PX_NEWBORN)
-        else:
-            frame.append(ws2812.OFF)
-    ws2812.show(frame)
+def stir(board):
+    # bring a few dead cells to life so the pattern never settles for good
+    dead = [i for i in range(CELLS) if not board[i]]
+    for _ in range(min(STIR, len(dead))):
+        board[dead.pop(random.randrange(len(dead)))] = 1
+    return board
 
+def draw(board):
+    ws2812.show([ALIVE if cell else ws2812.OFF for cell in board])
+
+board = random_board()
+seen = []
+gens = 0
 while True:
-    board = random_board()
-    prev = [0] * CELLS            # everything shows as newborn on the first frame
-    seen = []
-    steps = 0
-    draw(board, prev)
+    draw(board)
     time.sleep_ms(STEP_MS)
-    while True:
-        if not any(board) or steps >= MAX_STEPS:
-            break                 # everything died, or it has run long enough
-        key = bytes(board)
-        if key in seen and steps >= MIN_STEPS:
-            break                 # settled into a still life or a repeating cycle
-        seen.append(key)
-        if len(seen) > HISTORY:
-            seen.pop(0)
-        prev, board = board, step(board)
-        steps += 1
-        draw(board, prev)
-        time.sleep_ms(STEP_MS)
-    time.sleep_ms(END_MS)
+    seen.append(bytes(board))
+    if len(seen) > HISTORY:
+        seen.pop(0)
+    board = step(board)
+    gens += 1
+    if gens >= MAX_GENS or not any(board):
+        board = random_board()      # everything died, or it ran long enough
+        seen = []
+        gens = 0
+    elif bytes(board) in seen:
+        board = stir(board)         # settled into a still life or short cycle
+        seen = []
